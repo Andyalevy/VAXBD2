@@ -1,83 +1,91 @@
 package ar.edu.unlp.info.bd2.services;
 
-import ar.edu.unlp.info.bd2.model.Nurse;
-import ar.edu.unlp.info.bd2.model.SupportStaff;
-import ar.edu.unlp.info.bd2.repositories.VaxException;
+//import ar.edu.unlp.info.bd2.model.Nurse;
+//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import ar.edu.unlp.info.bd2.repositories.VaxRepository;
+import jdk.jfr.internal.Repository;
 
-import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.Optional;
+public class VaxServiceImpl implements VaxService{
 
-public class VaxServiceImplementation implements VaxService{
-    @Override
+    //TODO: Revisar si es correcta esta forma de tener el repositorio.
+    private VaxRepository repository;
+
+    public VaxServiceImpl() {}
+
+    public VaxServiceImpl(VaxRepository aRepository) {
+        repository = aRepository;
+    }
+
+    //TODO: Descomentar todo a medida que se vaya haciendo, los imports de las lineas 3 y 4 tambien.
+    /*@Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Vaccine createVaccine(String name) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Optional<Patient> getPatientByEmail(String email) {
         return Optional.empty();
-    }
+    }*/
 
-    @Override
+    /*@Override
     @Transactional
     //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
     public Optional<Vaccine> getVaccineByName(String name) {
         return Optional.empty();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Centre createCentre(String name) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
         return Optional.empty();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Centre updateCentre(Centre centre) {
         return null;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         return Optional.empty();
-    }
+    }*/
 }

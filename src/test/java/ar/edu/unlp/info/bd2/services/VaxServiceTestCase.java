@@ -2,7 +2,7 @@ package ar.edu.unlp.info.bd2.services;
 
 import ar.edu.unlp.info.bd2.config.AppConfig;
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
-import ar.edu.unlp.info.bd2.model.*;
+//import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,9 @@ public class VaxServiceTestCase {
 		dob = cal.getTime();
 	}
 
-    @Test
+	// TODO: A medida que se vaya agregando toda la funcionalidad a testear, ir descomentando los tests. Tambien descomentar la linea 5 cuando se agregue model.
+
+    /*@Test
     public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
     	assertNotNull (fede.getId());
@@ -55,9 +57,9 @@ public class VaxServiceTestCase {
     	assertEquals("pas$w0rd", user.getPassword());
     	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
     	assertEquals("Constraint Violation",ex.getMessage());
-    }
+    }*/
 
-	@Test
+	/*@Test
 	public void testCreateVaccine() throws VaxException{
 		Vaccine sp = this.service.createVaccine("Sinopharm");
 		assertNotNull(sp.getId());
@@ -71,9 +73,9 @@ public class VaxServiceTestCase {
 		assertEquals("Sinopharm", saved.getName());
 		VaxException ex = assertThrows(VaxException.class, () -> this.service.createVaccine("Sinopharm"));
 		assertEquals("Constraint Violation",ex.getMessage());
-	}
+	}*/
 
-	@Test
+	/*@Test
 	public void testCreateShot() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
 		Vaccine az = this.service.createVaccine("AstraZeneca");
@@ -89,9 +91,9 @@ public class VaxServiceTestCase {
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
 		
-	}
+	}*/
 
-	@Test
+	/*@Test
 	public void testCreateCentre() throws VaxException{
 		Centre nuevo = this.service.createCentre("Calle 2");
 		Nurse fabian = this.service.createNurse("43142333", "Fabian Ayala", 4);
@@ -103,9 +105,9 @@ public class VaxServiceTestCase {
 		assertEquals("Calle 2", calle2.getName());
 		assertTrue(calle2.getStaffs().contains(fabian));
 		assertTrue(fabian.getCentres().contains(calle2));
-	}
+	}*/
 
-	@Test
+	/*@Test
 	public void testCreateSupportStaff() throws VaxException{
 		Centre h = this.service.createCentre("Hospital Italiano");
 		SupportStaff ana = this.service.createSupportStaff("23331324", "Ana Mederos", "Ingresos");
@@ -121,9 +123,9 @@ public class VaxServiceTestCase {
 		assertEquals(1,italiano.getStaffs().size());
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
 		
-	}
+	}*/
 
-	@Test
+	/*@Test
 	public void testVaccinationSchedule() throws VaxException{
 		Vaccine az = this.service.createVaccine("AstraZeneca");
 		Vaccine sv = this.service.createVaccine("Sputnik V");
@@ -157,6 +159,6 @@ public class VaxServiceTestCase {
 			throw new VaxException("Schedule doesn't exists");
 		}
 
-	}
+	}*/
 
 }
