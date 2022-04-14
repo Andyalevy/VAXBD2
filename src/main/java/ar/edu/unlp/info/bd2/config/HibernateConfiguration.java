@@ -45,7 +45,7 @@ public class HibernateConfiguration {
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create"); //TODO: cambiar a update para que no la cree todas las veces
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         hibernateProperties.setProperty("hibernate.format_sql", "true");
@@ -54,6 +54,6 @@ public class HibernateConfiguration {
     }
 
     private Integer getGroupNumber() {
-        return null;
+        return 7;
     }
 }
