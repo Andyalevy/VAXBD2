@@ -1,6 +1,6 @@
 package ar.edu.unlp.info.bd2.repositories;
 
-//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import ar.edu.unlp.info.bd2.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +21,12 @@ public class VaxRepository{
         }
         return supportStaff;
     }*/
+    public void save(Object objectToSave) throws VaxException{
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); //Trae o crea sesion activa
+            session.save(objectToSave);
+        } catch (Exception e) {
+            throw new VaxException("SOMETHING WENT WRONG"); //TODO: esto
+        }
+    }
 }
