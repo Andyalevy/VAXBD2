@@ -1,7 +1,6 @@
 package ar.edu.unlp.info.bd2.services;
 
-import ar.edu.unlp.info.bd2.model.Nurse;
-//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import jdk.jfr.internal.Repository;
@@ -53,12 +52,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         Nurse nurse = new Nurse(dni,fullName,experience);
-        try{
-            this.repository.save(nurse);
-        }
-        catch (Exception e) {
-            throw new VaxException("SOMETHING WENT WRONG"); //TODO: esto
-        }
+        this.repository.save(nurse);
         return nurse;
     }
 
