@@ -17,7 +17,7 @@ public abstract class Staff {
     @Column
     protected String dni;
     @Column
-    protected Centre centres;
+    protected List<Centre>  centres;
 
     public Staff() {
     }
@@ -38,11 +38,7 @@ public abstract class Staff {
         this.dni = dni;
     }
 
-    public Centre getCentres() {
-        return centres;
-    }
+    public List<Centre> getCentres() { return centres; }
 
-    public void setCentres(Centre centres) {
-        this.centres = centres;
-    }
+    public void setCentres(List<Centre> centres) { this.centres = centres; }
 }
