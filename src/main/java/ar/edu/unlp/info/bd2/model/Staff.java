@@ -16,6 +16,8 @@ public abstract class Staff {
     protected String fullName;
     @Column
     protected String dni;
+    @Column
+    protected Centre centres;
 
     public Staff() {
     }
@@ -34,5 +36,13 @@ public abstract class Staff {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public Centre getCentres() {
+        return centres;
+    }
+
+    public void setCentres(Centre centres) {
+        this.centres = centres;
     }
 }
