@@ -17,8 +17,8 @@ public abstract class Staff {
     protected String fullName;
     @Column
     protected String dni;
-    @Column
-    protected List<Centre>  centres;
+    //@Column
+    //protected List<Centre>  centres;
 
     public Staff() {
     }
@@ -39,7 +39,7 @@ public abstract class Staff {
         this.dni = dni;
     }
 
-    public List<Centre> getCentres() { return centres; }
+    //public List<Centre> getCentres() { return centres; }
 
-    public void setCentres(List<Centre> centres) { this.centres = centres; }
+    //public void setCentres(List<Centre> centres) { this.centres = centres; }
 }

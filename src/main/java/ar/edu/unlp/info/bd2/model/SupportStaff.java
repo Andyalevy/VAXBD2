@@ -12,7 +12,7 @@ public class SupportStaff extends Staff {
     public SupportStaff() {
     }
 
-    public SupportStaff(String fullName, String dni, String area) {
+    public SupportStaff(String dni,String fullName, String area) {
         this.setDni(dni);
         this.setFullName(fullName);
         this.setArea(area);
