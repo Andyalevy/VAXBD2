@@ -11,6 +11,11 @@ public class VaxRepository {
     private SessionFactory sessionFactory;
 
     // TODO: Descomentar cuando este implementado Support Staff (linea 3 tambien)
+    /**
+     * This method will get the current session, and get the supportStaff by the given dni.
+     * @param dni
+     * @return Optional SupportStaff
+     */
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
         try {
@@ -22,6 +27,12 @@ public class VaxRepository {
         return supportStaff;
     }
 
+    /**
+     * This method will save any given object.
+     * If the table do not exist it will throw an exception.
+     * @param objectToSave
+     * @throws VaxException
+     */
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
@@ -31,6 +42,13 @@ public class VaxRepository {
         }
     }
 
+    /**
+     * This method will update a given object.
+     * If the object do not exist in the database, it will throw an exception.
+     * @param objectToUpdate
+     * @return ObjectToUpdate
+     * @throws VaxException
+     */
     public Object update(Object objectToUpdate) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa

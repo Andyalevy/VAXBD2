@@ -7,7 +7,6 @@ import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import java.util.Optional;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
 public class VaxServiceImpl implements VaxService{
