@@ -13,7 +13,7 @@ import org.springframework.test.annotation.Rollback;
 public class VaxServiceImpl implements VaxService{
 
     //TODO: Revisar si es correcta esta forma de tener el repositorio.
-    @Autowired
+
     private VaxRepository repository;
 
     public VaxServiceImpl() {}

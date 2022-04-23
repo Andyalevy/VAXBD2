@@ -2,6 +2,7 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
 import java.util.List;
+import ar.edu.unlp.info.bd2.model.Centre;
 
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -17,8 +18,9 @@ public abstract class Staff {
     protected String fullName;
     @Column
     protected String dni;
-    //@Column
-    //protected List<Centre>  centres;
+    @Column
+    @OneToMany
+    protected List<Centre>  centres;
 
     public Staff() {
     }
@@ -39,7 +41,7 @@ public abstract class Staff {
         this.dni = dni;
     }
 
-    //public List<Centre> getCentres() { return centres; }
+    public List<Centre> getCentres() { return centres; }
 
-    //public void setCentres(List<Centre> centres) { this.centres = centres; }
+    public void setCentres(List<Centre> centres) { this.centres = centres; }
 }
