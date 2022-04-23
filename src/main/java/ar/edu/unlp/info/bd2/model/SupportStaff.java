@@ -2,17 +2,22 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.util.ArrayList;
 
-@Entity
+@Entity(name="SupportStaff")
 @DiscriminatorValue("SupportStaff")
-public class SupportStaff extends Staff{
+public class SupportStaff extends Staff {
+
     protected String area;
 
     public SupportStaff() {
     }
 
-    public SupportStaff(String area) {
-        this.area = area;
+    public SupportStaff(String dni,String fullName, String area) {
+        this.setDni(dni);
+        this.setFullName(fullName);
+        this.setArea(area);
+        this.centres = new ArrayList<Centre>();
     }
 
     public String getArea() {
