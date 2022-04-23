@@ -1,6 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -17,6 +18,7 @@ public abstract class Staff {
     @Column
     protected String dni;
     @Column
+    @OneToMany
     protected List<Centre>  centres;
 
     public Staff() {
