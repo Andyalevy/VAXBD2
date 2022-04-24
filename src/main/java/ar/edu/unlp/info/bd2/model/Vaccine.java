@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,13 +13,18 @@ public class Vaccine {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "name", unique = true)
     private String name;
 
     public Vaccine(String name) {
-        this.name = name;
+        this.setName(name);
     }
 
     public Vaccine() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

@@ -1,13 +1,16 @@
 package ar.edu.unlp.info.bd2.services;
 
-//import ar.edu.unlp.info.bd2.model.Nurse;
-//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import java.util.Optional;
+
+import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import jdk.jfr.internal.Repository;
 
 public class VaxServiceImpl implements VaxService{
 
     //TODO: Revisar si es correcta esta forma de tener el repositorio.
+
     private VaxRepository repository;
 
     public VaxServiceImpl() {}
@@ -22,10 +25,12 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Vaccine createVaccine(String name) throws VaxException {
-        return null;
-    }*/
+        Vaccine vaccine = new Vaccine(name);
+        this.repository.save(vaccine);
+        return vaccine;
+    }
 
     /*@Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
@@ -37,12 +42,11 @@ public class VaxServiceImpl implements VaxService{
         return Optional.empty();
     }*/
 
-    /*@Override
-    @Transactional
+    @Override
     //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getVaccineByName(name));
+    }
 
     /*@Override
     public Centre createCentre(String name) throws VaxException {
