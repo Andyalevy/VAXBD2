@@ -3,6 +3,7 @@ package ar.edu.unlp.info.bd2.repositories;
 import ar.edu.unlp.info.bd2.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class VaxRepository {
@@ -18,6 +19,7 @@ public class VaxRepository {
      * @param dni
      * @return Optional SupportStaff
      */
+    /*
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
         try {
@@ -29,6 +31,7 @@ public class VaxRepository {
         }
         return supportStaff;
     }
+    /*
 
     /**
      * This method will get the current session, and get a vaccine by the given
@@ -56,12 +59,22 @@ public class VaxRepository {
      * @param objectToSave
      * @throws VaxException
      */
+    
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
             session.save(objectToSave);
+            session.flush();
         } catch (Exception e) {
-            throw new VaxException("Constraint Violation"); // TODO: esto
+            Throwable t = e.getCause();
+            while ((t != null) && !(t instanceof ConstraintViolationException)) {
+                t = t.getCause();
+            }
+            if (t instanceof ConstraintViolationException) {
+                throw new VaxException("Constraint Violation");
+            } else {
+                throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+            }
         }
     }
 
@@ -69,7 +82,7 @@ public class VaxRepository {
      * This method will update a given object.
      * If the object do not exist in the database, it will throw an exception.
      * @param objectToUpdate
-     * @return ObjectToUpdate
+     * @return objectToUpdate
      * @throws VaxException
      */
     public Object update(Object objectToUpdate) throws VaxException {

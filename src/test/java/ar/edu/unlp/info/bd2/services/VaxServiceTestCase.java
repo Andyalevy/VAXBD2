@@ -71,9 +71,8 @@ public class VaxServiceTestCase {
 		Vaccine saved = vax.get();
 		assertNotNull(saved.getId());
 		assertEquals("Sinopharm", saved.getName());
-		//TODO: check how to test the following
-		//VaxException ex = assertThrows(VaxException.class, () -> this.service.createVaccine("Sinopharm"));
-		//assertEquals("Constraint Violation",ex.getMessage());
+		VaxException ex = assertThrows(VaxException.class, () -> this.service.createVaccine("Sinopharm"));
+		assertEquals("Constraint Violation",ex.getMessage());
 	}
 
 	/*@Test
