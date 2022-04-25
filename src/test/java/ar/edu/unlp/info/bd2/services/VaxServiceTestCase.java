@@ -2,7 +2,7 @@ package ar.edu.unlp.info.bd2.services;
 
 import ar.edu.unlp.info.bd2.config.AppConfig;
 import ar.edu.unlp.info.bd2.config.HibernateConfiguration;
-//import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -125,7 +125,7 @@ public class VaxServiceTestCase {
 		
 	}*/
 
-	/*@Test
+	@Test
 	public void testVaccinationSchedule() throws VaxException{
 		Vaccine az = this.service.createVaccine("AstraZeneca");
 		Vaccine sv = this.service.createVaccine("Sputnik V");
@@ -158,7 +158,6 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
-
-	}*/
+	}
 
 }

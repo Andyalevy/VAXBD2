@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.bd2.services;
-//import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
@@ -27,7 +27,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return la vacuna creada
 	 * @throws VaxException
 	 */
-	//Vaccine createVaccine(String name) throws VaxException;
+	Vaccine createVaccine(String name) throws VaxException;
 
 	/**
 	 *
@@ -55,7 +55,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param name nombre de la vacuna
 	 * @return
 	 */
-	//Optional<Vaccine> getVaccineByName(String name);
+	Optional<Vaccine> getVaccineByName(String name);
 
 	/**
 	 *
@@ -87,13 +87,13 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el esquema nueva vacío
 	 * @throws VaxException
 	 * */
-	//VaccinationSchedule createVaccinationSchedule() throws VaxException;
+	VaccinationSchedule createVaccinationSchedule() throws VaxException;
 
 	/**
 	 * @param id el id del esquema
 	 * @return el esquema de vacunación
 	 * */
-	//VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
+	VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
 
 	/**
 	 * @param name el nombre del centro a buscar
