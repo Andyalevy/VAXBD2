@@ -11,10 +11,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ShotCertificate")
 public class ShotCertificate {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long serieNumber;
+    private Long serialNumber;
     private Date date;
 
     public ShotCertificate(){
@@ -31,5 +31,9 @@ public class ShotCertificate {
     public Date getDate(){
         return date;
     }
-    
+
+    public Long getSerialNumber() {
+        return serialNumber;
+    }
+
 }
