@@ -13,19 +13,15 @@ public class VaxRepository {
 
     // TODO: Descomentar cuando este implementado Support Staff (linea 3 tambien)
     /**
-     * This method will get the current session, and get the supportStaff by the
-     * given dni.
-     * 
+     * This method will get the current session, and get the supportStaff by the given dni.
      * @param dni
      * @return Optional SupportStaff
      */
-    /*
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni")
-                    .setParameter("dni", dni).uniqueResult();
+            supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni").setParameter("dni", dni).uniqueResult();
         } catch (Exception e) {
             return null;
         }
@@ -76,11 +72,9 @@ public class VaxRepository {
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
-     * 
      * @param objectToSave
      * @throws VaxException
      */
-    
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa

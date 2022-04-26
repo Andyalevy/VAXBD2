@@ -6,7 +6,11 @@ import java.util.Optional;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import jdk.jfr.internal.Repository;
+//import jdk.jfr.internal.Repository;
+import java.util.Optional;
+import javax.transaction.Transactional;
+
+import org.springframework.test.annotation.Rollback;
 
 public class VaxServiceImpl implements VaxService{
 
@@ -35,10 +39,15 @@ public class VaxServiceImpl implements VaxService{
         return vaccine;
     }
 
-    /*@Override
+    @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
-        return null;
-    }*/
+        Shot shot = new Shot(patient,vaccine,date,centre,nurse);
+        ShotCertificate shotCertificate = new ShotCertificate(date);
+        this.repository.save(shot);
+        this.repository.save(shotCertificate);
+        shot.setShotCertificate(shotCertificate);
+        return shot;
+    }
 
     @Override
     public Optional<Patient> getPatientByEmail(String email) {
@@ -51,20 +60,26 @@ public class VaxServiceImpl implements VaxService{
         return Optional.ofNullable(this.repository.getVaccineByName(name));
     }
 
-    /*@Override
+    @Override
     public Centre createCentre(String name) throws VaxException {
-        return null;
-    }*/
+        Centre centre = new Centre(name);
+        this.repository.save(centre);
+        return centre;
+    }
 
-    /*@Override
+    @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
-        return null;
-    }*/
+        Nurse nurse = new Nurse(dni,fullName,experience);
+        this.repository.save(nurse);
+        return nurse;
+    }
 
-    /*@Override
+    @Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
-        return null;
-    }*/
+        SupportStaff supportStaff = new SupportStaff(dni,fullName,area);
+        this.repository.save(supportStaff);
+        return supportStaff;
+    }
 
     @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
@@ -83,18 +98,21 @@ public class VaxServiceImpl implements VaxService{
         return Optional.empty();
     }*/
 
-    /*@Override
+    @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
-        return null;
-    }*/
+        this.repository.update(staff);
+        return staff;
+    }
 
     /*@Override
     public Centre updateCentre(Centre centre) {
         return null;
     }*/
 
-    /*@Override
+    @Override
+    @Transactional
+    @Rollback
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
+    }
 }
