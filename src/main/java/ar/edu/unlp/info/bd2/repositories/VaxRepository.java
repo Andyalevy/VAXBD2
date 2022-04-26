@@ -51,6 +51,17 @@ public class VaxRepository {
         return vaccine;
     }
 
+    public Patient getPatientByEmail(String email){
+        Patient patient;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return patient;
+    }
+
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
         VaccinationSchedule vaccinationSchedule;
         try {

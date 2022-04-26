@@ -19,7 +19,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-	//Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
+	Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
 
 	/**
 	 *
@@ -47,7 +47,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param email email del usuario
 	 * @return
 	 */
-	//Optional<Patient> getPatientByEmail(String email);
+	Optional<Patient> getPatientByEmail(String email);
 
 
 	/**

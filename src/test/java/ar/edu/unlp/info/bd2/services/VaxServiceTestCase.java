@@ -41,7 +41,7 @@ public class VaxServiceTestCase {
 
 	// TODO: A medida que se vaya agregando toda la funcionalidad a testear, ir descomentando los tests. Tambien descomentar la linea 5 cuando se agregue model.
 
-    /*@Test
+    @Test
     public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
     	assertNotNull (fede.getId());
@@ -57,7 +57,7 @@ public class VaxServiceTestCase {
     	assertEquals("pas$w0rd", user.getPassword());
     	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
     	assertEquals("Constraint Violation",ex.getMessage());
-    }*/
+    }
 
 	/*@Test
 	public void testCreateVaccine() throws VaxException{
@@ -125,7 +125,7 @@ public class VaxServiceTestCase {
 		
 	}*/
 
-	@Test
+	/*@Test
 	public void testVaccinationSchedule() throws VaxException{
 		Vaccine az = this.service.createVaccine("AstraZeneca");
 		Vaccine sv = this.service.createVaccine("Sputnik V");
@@ -158,6 +158,7 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
-	}
+		
+	}*/
 
 }

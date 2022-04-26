@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.bd2.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import ar.edu.unlp.info.bd2.model.*;
@@ -20,10 +21,12 @@ public class VaxServiceImpl implements VaxService{
     }
 
     //TODO: Descomentar todo a medida que se vaya haciendo, los imports de las lineas 3 y 4 tambien.
-    /*@Override
+    @Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
-        return null;
-    }*/
+        Patient patient = new Patient(email,fullname,password,dayOfBirth);
+        this.repository.save(patient);
+        return patient;
+    }
 
     @Override
     public Vaccine createVaccine(String name) throws VaxException {
@@ -37,10 +40,10 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Optional<Patient> getPatientByEmail(String email) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getPatientByEmail(email));
+    }
 
     @Override
     //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
