@@ -1,31 +1,36 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 @Entity
-@DiscriminatorValue("Centre")
+@Table(name="Centre")
 public class Centre {
 
     @Id
-    @GeneratedValue
-    private long id;
-    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Column(name = "name", unique = true)
     private String name;
-    /*@Column
-    private List<Staff> staff;*/ //TODO: Descomentar cuando exista Staff (abstract)
+    @ManyToMany
+    private List<Staff> staffs = new ArrayList<Staff>();
 
-    public Centre() {}
-
-    public Centre(String aName) {
-        name = aName;
+    public Centre() {
     }
 
-    public void setName(String aName) {
-        name = aName;
+    public Centre(String name) {
+        this.name = name;
     }
 
-    public long getId () {
+    public Long getId() {
         return id;
     }
 
@@ -33,11 +38,21 @@ public class Centre {
         return name;
     }
 
-    /*public addStaffs(Staff aStaffMember) {
-        staff.add(aStaffMember);
-    }*/
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    /*public List<Staff> getStaffs() {
-        return staff;
-    }*/
+    public List<Staff> getStaffs() {
+        return this.staffs;
+    }
+
+    public void setStaff(List<Staff> workers) {
+        this.staffs = workers;
+    }
+
+    public void addStaff(Staff worker){
+        this.staffs.add(worker);
+        worker.addCentre(this);
+    }
+
 }

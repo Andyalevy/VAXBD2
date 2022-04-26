@@ -1,7 +1,9 @@
 package ar.edu.unlp.info.bd2.services;
 
-//import ar.edu.unlp.info.bd2.model.Nurse;
-//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import java.util.Optional;
+
+import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import jdk.jfr.internal.Repository;
 
@@ -44,10 +46,12 @@ public class VaxServiceImpl implements VaxService{
         return Optional.empty();
     }*/
 
-    /*@Override
+    @Override
     public Centre createCentre(String name) throws VaxException {
-        return null;
-    }*/
+        Centre centre = new Centre(name);
+        this.repository.save(centre);
+        return centre;
+    }
 
     /*@Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
@@ -69,20 +73,21 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getCentreByName(name));
+    }
 
     /*@Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
         return null;
     }*/
 
-    /*@Override
-    public Centre updateCentre(Centre centre) {
-        return null;
-    }*/
+    @Override
+    public Centre updateCentre(Centre centre) throws VaxException {
+        this.repository.update(centre);
+        return centre;
+    }
 
     /*@Override
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
