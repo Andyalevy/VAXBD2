@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +18,8 @@ public class VaccinationSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(cascade=CascadeType.PERSIST)
-	private List<Vaccine> vaccines = new ArrayList<Vaccine>();
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    private List<Vaccine> vaccines = new ArrayList<Vaccine>();
 
     public VaccinationSchedule() {
     }
@@ -28,8 +28,8 @@ public class VaccinationSchedule {
         return id;
     }
 
-    public ArrayList<Vaccine> getVaccines() {
-        return (ArrayList<Vaccine>) vaccines;
+    public List<Vaccine> getVaccines() {
+        return vaccines;
     }
 
     public void setSchedule(ArrayList<Vaccine> vaccines) {
