@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.bd2.services;
-//import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-	//Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
+	Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
 
 	/**
 	 *
@@ -47,7 +47,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param email email del usuario
 	 * @return
 	 */
-	//Optional<Patient> getPatientByEmail(String email);
+	Optional<Patient> getPatientByEmail(String email);
 
 
 	/**

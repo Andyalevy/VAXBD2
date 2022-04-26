@@ -1,8 +1,10 @@
 package ar.edu.unlp.info.bd2.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -13,12 +15,16 @@ public class Patient {
     @Id
     @GeneratedValue
     private Long Id;
+    @Column(unique = true)
     private String email;
     private String fullname;
     private String password;
     private Date dayOfBirth;
 
+    @OneToOne
     private VaccinationSchedule schedule;
+    @OneToOne
+    private Shot shot;
 
     public Patient() {
     }
@@ -68,5 +74,17 @@ public class Patient {
 
     public void setSchedule(VaccinationSchedule schedule) {
         this.schedule = schedule;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public Shot getShot() {
+        return shot;
+    }
+
+    public void setShot(Shot shot) {
+        this.shot = shot;
     }
 }
