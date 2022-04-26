@@ -27,7 +27,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return la vacuna creada
 	 * @throws VaxException
 	 */
-	Vaccine createVaccine(String name) throws VaxException;
+	//Vaccine createVaccine(String name) throws VaxException;
 
 	/**
 	 *
@@ -55,7 +55,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param name nombre de la vacuna
 	 * @return
 	 */
-	Optional<Vaccine> getVaccineByName(String name);
+	//Optional<Vaccine> getVaccineByName(String name);
 
 	/**
 	 *
