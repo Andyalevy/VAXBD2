@@ -1,7 +1,6 @@
 package ar.edu.unlp.info.bd2.services;
 
-//import ar.edu.unlp.info.bd2.model.Nurse;
-//import ar.edu.unlp.info.bd2.model.SupportStaff;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import jdk.jfr.internal.Repository;
 
@@ -27,10 +26,15 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
-        return null;
-    }*/
+        Shot shot = new Shot(patient,vaccine,date,centre,nurse);
+        ShotCertificate shotCertificate = new ShotCertificate(date);
+        this.repository.save(shot);
+        this.repository.save(shotCertificate);
+        shot.setShotCertificate(shotCertificate);
+        return shot;
+    }
 
     /*@Override
     public Optional<Patient> getPatientByEmail(String email) {
