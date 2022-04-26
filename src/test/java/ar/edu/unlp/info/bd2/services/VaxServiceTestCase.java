@@ -39,8 +39,6 @@ public class VaxServiceTestCase {
 		dob = cal.getTime();
 	}
 
-	// TODO: A medida que se vaya agregando toda la funcionalidad a testear, ir descomentando los tests. Tambien descomentar la linea 5 cuando se agregue model.
-
     @Test
     public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
@@ -93,7 +91,7 @@ public class VaxServiceTestCase {
 		
 	}
 
-	/*@Test
+	@Test
 	public void testCreateCentre() throws VaxException{
 		Centre nuevo = this.service.createCentre("Calle 2");
 		Nurse fabian = this.service.createNurse("43142333", "Fabian Ayala", 4);
@@ -105,23 +103,24 @@ public class VaxServiceTestCase {
 		assertEquals("Calle 2", calle2.getName());
 		assertTrue(calle2.getStaffs().contains(fabian));
 		assertTrue(fabian.getCentres().contains(calle2));
-	}*/
+	}
 
 	@Test
 	public void testCreateSupportStaff() throws VaxException{
-		//Centre h = this.service.createCentre("Hospital Italiano");
+		Centre h = this.service.createCentre("Hospital Italiano");
 		SupportStaff ana = this.service.createSupportStaff("23331324", "Ana Mederos", "Ingresos");
 		assertEquals(0,ana.getCentres().size());
-		//h.addStaff(ana);
-		//Centre italiano = this.service.updateCentre(h);
+		h.addStaff(ana);
+		Centre italiano = this.service.updateCentre(h);
 		Optional<SupportStaff> anaModified = this.service.getSupportStaffByDni(ana.getDni());
-		if (!anaModified.isPresent()){throw new VaxException("No existe el centro con ese nombre");}
+		if (!anaModified.isPresent()){throw new VaxException("No existe el centro con ese nombre");};
 		SupportStaff AnaSaved = anaModified.get();
 		assertEquals("Ana Mederos",AnaSaved.getFullName());
 		assertEquals("Ingresos",AnaSaved.getArea());
-		assertEquals(0,AnaSaved.getCentres().size());
-		//assertEquals(1,italiano.getStaffs().size());
-		//assertTrue(italiano.getStaffs().contains(AnaSaved));
+		assertEquals(1,AnaSaved.getCentres().size());
+		assertEquals(1,italiano.getStaffs().size());
+		assertTrue(italiano.getStaffs().contains(AnaSaved));
+		
 	}
 
 	@Test
@@ -157,7 +156,7 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
-		
+
 	}
 
 }

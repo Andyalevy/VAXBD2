@@ -21,7 +21,7 @@ public class Centre {
     @Column(name = "name", unique = true)
     private String name;
     @ManyToMany
-    private List<Staff> workers = new ArrayList<Staff>();
+    private List<Staff> staffs = new ArrayList<Staff>();
 
     public Centre() {
     }
@@ -36,6 +36,23 @@ public class Centre {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Staff> getStaffs() {
+        return this.staffs;
+    }
+
+    public void setStaff(List<Staff> workers) {
+        this.staffs = workers;
+    }
+
+    public void addStaff(Staff worker){
+        this.staffs.add(worker);
+        worker.addCentre(this);
     }
     
 }

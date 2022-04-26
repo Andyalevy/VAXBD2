@@ -93,10 +93,10 @@ public class VaxServiceImpl implements VaxService{
         return this.repository.getVaccinationScheduleById(id);
     }
 
-    /*@Override
+    @Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getCentreByName(name));
+    }
 
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
@@ -104,10 +104,11 @@ public class VaxServiceImpl implements VaxService{
         return staff;
     }
 
-    /*@Override
-    public Centre updateCentre(Centre centre) {
-        return null;
-    }*/
+    @Override
+    public Centre updateCentre(Centre centre) throws VaxException {
+        this.repository.update(centre);
+        return centre;
+    }
 
     @Override
     @Transactional

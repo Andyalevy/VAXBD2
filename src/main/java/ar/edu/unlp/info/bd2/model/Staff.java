@@ -45,4 +45,8 @@ public abstract class Staff {
     public List<Centre> getCentres() { return centres; }
 
     public void setCentres(List<Centre> centres) { this.centres = centres; }
+
+    public void addCentre(Centre centre){
+        this.centres.add(centre);
+    }
 }

@@ -99,7 +99,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param name el nombre del centro a buscar
 	 * @return el centro
 	 * */
-	//Optional<Centre> getCentreByName(String name) throws VaxException;
+	Optional<Centre> getCentreByName(String name) throws VaxException;
 
 	/**
 	 * @param staff el staff a actualizar
@@ -113,7 +113,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el centre
 	 * @throws VaxException 
 	 */
-	//Centre updateCentre(Centre centre);
+	Centre updateCentre(Centre centre) throws VaxException;
 
 	/**
 	 * @param dni el dni del SupportStaff a buscar

@@ -47,6 +47,18 @@ public class VaxRepository {
         return vaccine;
     }
 
+    public Centre getCentreByName(String name) {
+        Centre centre;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name)
+                    .uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return centre;
+    }
+
     public Patient getPatientByEmail(String email){
         Patient patient;
         try {
