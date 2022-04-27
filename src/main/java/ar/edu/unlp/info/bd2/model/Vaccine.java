@@ -16,11 +16,11 @@ public class Vaccine {
     @Column(name = "name", unique = true)
     private String name;
 
-    public Vaccine(String name) {
-        this.setName(name);
+    public Vaccine() {
     }
 
-    public Vaccine() {
+    public Vaccine(String name) {
+        this.setName(name);
     }
 
     public Long getId() {

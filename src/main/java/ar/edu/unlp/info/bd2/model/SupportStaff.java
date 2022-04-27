@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @DiscriminatorValue("SupportStaff")
 public class SupportStaff extends Staff {
 
-    protected String area;
+    private String area;
 
     public SupportStaff() {
     }

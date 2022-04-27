@@ -5,10 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Nurse")
 @DiscriminatorValue("Nurse")
 public class Nurse extends Staff {
-    protected Integer experience;
+    private Integer experience;
 
     public Nurse() {
     }

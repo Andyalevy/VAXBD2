@@ -1,12 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,9 +19,9 @@ public class Patient {
     private String password;
     private Date dayOfBirth;
 
-    @OneToOne
+    @ManyToOne
     private VaccinationSchedule schedule;
-    @ManyToMany
+    @OneToMany
     private List<Shot> shots = new ArrayList<Shot>();
 
     public Patient() {
