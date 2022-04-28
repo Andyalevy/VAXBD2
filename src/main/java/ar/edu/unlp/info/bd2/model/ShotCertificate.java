@@ -14,7 +14,7 @@ public class ShotCertificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long serialNumber;
+    private Long serialNumber;
     private Date date;
 
     public ShotCertificate(){

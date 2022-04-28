@@ -21,7 +21,7 @@ public class Patient {
     @ManyToOne
     private VaccinationSchedule schedule;
     @OneToMany
-    private List<Shot> shots = new ArrayList<Shot>();
+    private List<Shot> shots = new ArrayList<>();
 
     public Patient() {
     }

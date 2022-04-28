@@ -21,7 +21,7 @@ public class Centre {
     @Column(name = "name", unique = true)
     private String name;
     @ManyToMany(mappedBy = "centres")
-    private List<Staff> staffs = new ArrayList<Staff>();
+    private List<Staff> staffs = new ArrayList<>();
 
     public Centre() {
     }
