@@ -13,14 +13,11 @@ import java.util.List;
 public abstract class Staff {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Column
     protected String fullName;
-    @Column
     protected String dni;
-    @Column
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL}) //TODO: checkear que estrategia de cascada usar
     protected List<Centre> centres =  new ArrayList<Centre>();
 
     public Staff() {

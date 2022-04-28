@@ -11,14 +11,13 @@ import java.util.List;
 public class Patient {
 
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(unique = true)
     private String email;
     private String fullname;
     private String password;
     private Date dayOfBirth;
-
     @ManyToOne
     private VaccinationSchedule schedule;
     @OneToMany
@@ -75,7 +74,7 @@ public class Patient {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public List<Shot> getShots() {

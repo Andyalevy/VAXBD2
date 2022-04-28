@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +17,11 @@ import javax.persistence.Table;
 public class Shot {
     
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Date date;
-    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval = true)
-    @JoinColumn(name="shotCertificate_id")
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name="shotCertificate_id", nullable = false)
     private ShotCertificate shotCertificate;
     @ManyToOne
     @JoinColumn(name="patient_id", nullable = false)
@@ -44,7 +45,7 @@ public class Shot {
         this.vaccine = vaccine;
         this.nurse = nurse;
         this.centre = centre;
-        this.shotCertificate = new ShotCertificate(date, this);
+        this.setShotCertificate(new ShotCertificate(date));
         patient.addShot(this);
     }
 
@@ -61,7 +62,7 @@ public class Shot {
     }
 
     public Long getId() {
-        return this.Id;
+        return this.id;
     }
 
     public void setShotCertificate(ShotCertificate shotCertificate) {

@@ -6,29 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ShotCertificate")
 public class ShotCertificate {
 
-    static long ids = 0;
-
     @Id
-    private long serialNumber = ids++;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long serialNumber;
     private Date date;
-    @OneToOne
-    private Shot shot;
 
     public ShotCertificate(){
     }
 
-    public ShotCertificate(Date date, Shot shot){
+    public ShotCertificate(Date date){
         this.setDate(date);
-        this.shot=shot;
-        this.shot.setShotCertificate(this);
     }
 
     public void setDate(Date date){

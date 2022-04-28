@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class, HibernateConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 @Transactional
-@Rollback(true)
+@Rollback(false)
 public class VaxServiceTestCase {
 	private Date dob;
 
@@ -76,7 +76,7 @@ public class VaxServiceTestCase {
 	@Test
 	public void testCreateShot() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
-		Vaccine az = this.service.createVaccine("AstraZeneca");
+		Vaccine az = this.service.createVaccine("AstraZeneca2");
 		Centre htal = this.service.createCentre("Hospital Español");
 		Nurse nurse = this.service.createNurse("22314678","Mary Poppins", 2);
 		Shot shot = this.service.createShot(fede,az,dob,htal,nurse);
@@ -125,7 +125,7 @@ public class VaxServiceTestCase {
 
 	@Test
 	public void testVaccinationSchedule() throws VaxException{
-		Vaccine az = this.service.createVaccine("AstraZeneca");
+		Vaccine az = this.service.createVaccine("AstraZeneca3");
 		Vaccine sv = this.service.createVaccine("Sputnik V");
 		Vaccine jh = this.service.createVaccine("Johnson");
 		Vaccine md = this.service.createVaccine("Moderna");

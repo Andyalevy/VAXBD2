@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 
-@Entity(name="SupportStaff")
+@Entity
 @DiscriminatorValue("SupportStaff")
 public class SupportStaff extends Staff {
 

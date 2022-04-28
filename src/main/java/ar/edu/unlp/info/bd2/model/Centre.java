@@ -16,11 +16,11 @@ import javax.persistence.Table;
 public class Centre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name", unique = true)
     private String name;
-    @ManyToMany
+    @ManyToMany(mappedBy = "centres")
     private List<Staff> staffs = new ArrayList<Staff>();
 
     public Centre() {
