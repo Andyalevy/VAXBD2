@@ -81,7 +81,7 @@ public interface VaxService extends VaxStatisticsService{
 	* @return el personal de apoyo creado
 	* @throws VaxException
 	* */
-	//SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
+	SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
 
 	/**
 	 * @return el esquema nueva vacío
@@ -106,7 +106,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el staff
 	 * @throws VaxException 
 	 */
-	//SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
+	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 
 	/**
 	 * @param centre el centre a actualizar
@@ -119,5 +119,5 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param dni el dni del SupportStaff a buscar
 	 * @return el SupportStaff
 	 * */
-	//Optional<SupportStaff> getSupportStaffByDni(String dni);
+	Optional<SupportStaff> getSupportStaffByDni(String dni);
 }

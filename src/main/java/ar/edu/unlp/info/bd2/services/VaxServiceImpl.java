@@ -3,11 +3,16 @@ package ar.edu.unlp.info.bd2.services;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import jdk.jfr.internal.Repository;
+//import jdk.jfr.internal.Repository;
+import java.util.Optional;
+import javax.transaction.Transactional;
+
+import org.springframework.test.annotation.Rollback;
 
 public class VaxServiceImpl implements VaxService{
 
     //TODO: Revisar si es correcta esta forma de tener el repositorio.
+
     private VaxRepository repository;
 
     public VaxServiceImpl() {}
@@ -56,10 +61,12 @@ public class VaxServiceImpl implements VaxService{
         return nurse;
     }
 
-    /*@Override
+    @Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
-        return null;
-    }*/
+        SupportStaff supportStaff = new SupportStaff(dni,fullName,area);
+        this.repository.save(supportStaff);
+        return supportStaff;
+    }
 
     /*@Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
@@ -76,18 +83,21 @@ public class VaxServiceImpl implements VaxService{
         return Optional.empty();
     }*/
 
-    /*@Override
+    @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
-        return null;
-    }*/
+        this.repository.update(staff);
+        return staff;
+    }
 
     /*@Override
     public Centre updateCentre(Centre centre) {
         return null;
     }*/
 
-    /*@Override
+    @Override
+    @Transactional
+    @Rollback
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
+    }
 }
