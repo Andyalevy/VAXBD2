@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.bd2.services;
-//import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
@@ -72,7 +72,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el enfermero creado
 	 * @throws VaxException
 	 */
-	//Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
+	Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
 
 	/**
 	* @param dni el dni
