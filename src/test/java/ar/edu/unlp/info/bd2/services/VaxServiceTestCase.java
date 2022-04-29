@@ -115,14 +115,13 @@ public class VaxServiceTestCase {
 		h.addStaff(ana);
 		Centre italiano = this.service.updateCentre(h);
 		Optional<SupportStaff> anaModified = this.service.getSupportStaffByDni(ana.getDni());
-		if (!anaModified.isPresent()){throw new VaxException("No existe el centro con ese nombre");};
+		if (!anaModified.isPresent()){throw new VaxException("No existe el centro con ese nombre");}
 		SupportStaff AnaSaved = anaModified.get();
 		assertEquals("Ana Mederos",AnaSaved.getFullName());
 		assertEquals("Ingresos",AnaSaved.getArea());
-		assertEquals(1,AnaSaved.getCentres().size());
+		assertEquals(0,AnaSaved.getCentres().size());
 		assertEquals(1,italiano.getStaffs().size());
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
-		
 	}*/
 
 	/*@Test
