@@ -17,8 +17,8 @@ public abstract class Staff {
     protected Long id;
     protected String fullName;
     protected String dni;
-    @ManyToMany(cascade = {CascadeType.ALL}) //TODO: checkear que estrategia de cascada usar
-    protected List<Centre> centres =  new ArrayList<>();
+    //@ManyToMany(cascade = {CascadeType.ALL}) //TODO: checkear que estrategia de cascada usar
+    //protected List<Centre> centres =  new ArrayList<>();
 
     public Staff() {
     }
@@ -39,11 +39,11 @@ public abstract class Staff {
         this.dni = dni;
     }
 
-    public List<Centre> getCentres() { return centres; }
+    //public List<Centre> getCentres() { return centres; }
 
-    public void setCentres(List<Centre> centres) { this.centres = centres; }
+    //public void setCentres(List<Centre> centres) { this.centres = centres; }
 
-    public void addCentre(Centre centre){
+    /*public void addCentre(Centre centre){
         this.centres.add(centre);
-    }
+    }*/
 }
