@@ -27,10 +27,12 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Vaccine createVaccine(String name) throws VaxException {
-        return null;
-    }*/
+        Vaccine vaccine = new Vaccine(name);
+        this.repository.save(vaccine);
+        return vaccine;
+    }
 
     /*@Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
@@ -42,12 +44,11 @@ public class VaxServiceImpl implements VaxService{
         return Optional.empty();
     }*/
 
-    /*@Override
-    @Transactional
+    @Override
     //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getVaccineByName(name));
+    }
 
     /*@Override
     public Centre createCentre(String name) throws VaxException {
