@@ -2,18 +2,17 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="Nurse")
 @DiscriminatorValue("Nurse")
 public class Nurse extends Staff {
-    protected Integer experience;
+    
+    private Integer experience;
 
     public Nurse() {
     }
 
-    public Nurse(String fullName, String dni, Integer experience) {
+    public Nurse(String dni, String fullName, Integer experience) {
         this.setDni(dni);
         this.setFullName(fullName);
         this.setExperience(experience);
