@@ -54,10 +54,12 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
-        return null;
-    }*/
+        Nurse nurse = new Nurse(dni,fullName,experience);
+        this.repository.save(nurse);
+        return nurse;
+    }
 
     @Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
