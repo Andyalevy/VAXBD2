@@ -1,6 +1,8 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,15 +13,12 @@ import java.util.List;
 public abstract class Staff {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Column
     protected String fullName;
-    @Column
     protected String dni;
-    @Column
-    @OneToMany
-    protected List<Centre>  centres;
+    @ManyToMany(cascade = {CascadeType.ALL}) //TODO: checkear que estrategia de cascada usar
+    protected List<Centre> centres =  new ArrayList<>();
 
     public Staff() {
     }
@@ -43,4 +42,8 @@ public abstract class Staff {
     public List<Centre> getCentres() { return centres; }
 
     public void setCentres(List<Centre> centres) { this.centres = centres; }
+
+    public void addCentre(Centre centre){
+        this.centres.add(centre);
+    }
 }
