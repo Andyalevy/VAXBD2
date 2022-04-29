@@ -4,11 +4,11 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 
-@Entity(name="SupportStaff")
+@Entity
 @DiscriminatorValue("SupportStaff")
 public class SupportStaff extends Staff {
 
-    protected String area;
+    private String area;
 
     public SupportStaff() {
     }
@@ -17,7 +17,7 @@ public class SupportStaff extends Staff {
         this.setDni(dni);
         this.setFullName(fullName);
         this.setArea(area);
-        //this.centres = new ArrayList<Centre>();
+        //this.centres = new ArrayList<>();
     }
 
     public String getArea() {
