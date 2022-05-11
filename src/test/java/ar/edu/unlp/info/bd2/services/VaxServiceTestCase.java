@@ -158,7 +158,6 @@ public class VaxServiceTestCase {
 		catch (Exception e) {
 			throw new VaxException("Schedule doesn't exists");
 		}
-		
 	}*/
 
 }

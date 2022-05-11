@@ -63,12 +63,25 @@ public class VaxRepository {
         return vaccine;
     }
 
+    public VaccinationSchedule getVaccinationScheduleById(Long id) {
+        VaccinationSchedule vaccinationSchedule;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccinationSchedule;
+    }
+
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
+     * 
      * @param objectToSave
      * @throws VaxException
      */
+    
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
