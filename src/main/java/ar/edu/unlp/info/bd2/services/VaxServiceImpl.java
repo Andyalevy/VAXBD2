@@ -54,10 +54,12 @@ public class VaxServiceImpl implements VaxService{
         return Optional.ofNullable(this.repository.getVaccineByName(name));
     }
 
-    /*@Override
+    @Override
     public Centre createCentre(String name) throws VaxException {
-        return null;
-    }*/
+        Centre centre = new Centre(name);
+        this.repository.save(centre);
+        return centre;
+    }
 
     @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
@@ -73,22 +75,22 @@ public class VaxServiceImpl implements VaxService{
         return supportStaff;
     }
 
-    /*@Override
+    @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         this.repository.save(vaccinationSchedule);
         return vaccinationSchedule;
-    }*/
+    }
 
-    /*@Override
+    @Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
         return this.repository.getVaccinationScheduleById(id);
-    }*/
+    }
 
-    /*@Override
+    @Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getCentreByName(name));
+    }
 
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
@@ -96,10 +98,11 @@ public class VaxServiceImpl implements VaxService{
         return staff;
     }
 
-    /*@Override
-    public Centre updateCentre(Centre centre) {
-        return null;
-    }*/
+    @Override
+    public Centre updateCentre(Centre centre) throws VaxException {
+        this.repository.update(centre);
+        return centre;
+    }
 
     @Override
     @Transactional

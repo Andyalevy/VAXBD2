@@ -26,15 +26,18 @@ public class VaxRepository {
         }
         return supportStaff;
     }
-    
-    /**
-     * This method will get the current session, and get a vaccine by the given
-     * name.
-     * 
-     * @param name
-     * @return Optional Vaccine
-     */
-    
+
+    public Centre getCentreByName(String name) {
+        Centre centre;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return centre;
+    }
+
     public Patient getPatientByEmail(String email){
         Patient patient;
         try {
@@ -55,8 +58,7 @@ public class VaxRepository {
         Vaccine vaccine;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name)
-                    .uniqueResult();
+            vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name).uniqueResult();
         } catch (Exception e) {
             return null;
         }
@@ -77,11 +79,9 @@ public class VaxRepository {
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
-     * 
      * @param objectToSave
      * @throws VaxException
      */
-    
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
