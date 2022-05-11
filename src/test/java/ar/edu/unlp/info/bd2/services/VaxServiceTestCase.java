@@ -41,7 +41,7 @@ public class VaxServiceTestCase {
 
 	// TODO: A medida que se vaya agregando toda la funcionalidad a testear, ir descomentando los tests. Tambien descomentar la linea 5 cuando se agregue model.
 
-    @Test
+    /*@Test
     public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
     	assertNotNull (fede.getId());
@@ -57,7 +57,7 @@ public class VaxServiceTestCase {
     	assertEquals("pas$w0rd", user.getPassword());
     	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
     	assertEquals("Constraint Violation",ex.getMessage());
-    }
+    }*/
 
 	/*@Test
 	public void testCreateVaccine() throws VaxException{

@@ -1,30 +1,27 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Patient")
 public class Patient {
 
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(unique = true)
     private String email;
     private String fullname;
     private String password;
     private Date dayOfBirth;
-
-    @OneToOne
+    @ManyToOne
     private VaccinationSchedule schedule;
-    @OneToOne
-    private Shot shot;
+    @OneToMany
+    private List<Shot> shots = new ArrayList<>();
 
     public Patient() {
     }
@@ -77,14 +74,18 @@ public class Patient {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
-    public Shot getShot() {
-        return shot;
+    public List<Shot> getShots() {
+        return shots;
     }
 
-    public void setShot(Shot shot) {
-        this.shot = shot;
+    public void setShots(List<Shot> shot) {
+        this.shots = shot;
+    }
+
+    public void addShot(Shot shot){
+        this.shots.add(shot);
     }
 }
