@@ -38,10 +38,12 @@ public class VaxServiceImpl implements VaxService{
         return vaccine;
     }
 
-    /*@Override
+    @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
-        return null;
-    }*/
+        Shot shot = new Shot(patient,vaccine,date,centre,nurse);
+        this.repository.save(shot);
+        return shot;
+    }
 
     @Override
     public Optional<Patient> getPatientByEmail(String email) {

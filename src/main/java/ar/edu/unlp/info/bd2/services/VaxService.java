@@ -39,7 +39,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-	//Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
+	Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
 	
 
 	/**
