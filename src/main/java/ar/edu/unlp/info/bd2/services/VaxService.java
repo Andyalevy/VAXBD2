@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.bd2.services;
-//import ar.edu.unlp.info.bd2.model.*;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-	//Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
+	Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
 
 	/**
 	 *
@@ -27,7 +27,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return la vacuna creada
 	 * @throws VaxException
 	 */
-	//Vaccine createVaccine(String name) throws VaxException;
+	Vaccine createVaccine(String name) throws VaxException;
 
 	/**
 	 *
@@ -47,7 +47,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param email email del usuario
 	 * @return
 	 */
-	//Optional<Patient> getPatientByEmail(String email);
+	Optional<Patient> getPatientByEmail(String email);
 
 
 	/**
@@ -55,7 +55,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param name nombre de la vacuna
 	 * @return
 	 */
-	//Optional<Vaccine> getVaccineByName(String name);
+	Optional<Vaccine> getVaccineByName(String name);
 
 	/**
 	 *
@@ -63,7 +63,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el centro de vacunación nuevo
 	 * @throws VaxException
 	 */
-	//Centre createCentre(String name) throws VaxException;
+	Centre createCentre(String name) throws VaxException;
 
 	/**
 	 * @param dni el dni
@@ -72,7 +72,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el enfermero creado
 	 * @throws VaxException
 	 */
-	//Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
+	Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
 
 	/**
 	* @param dni el dni
@@ -81,43 +81,43 @@ public interface VaxService extends VaxStatisticsService{
 	* @return el personal de apoyo creado
 	* @throws VaxException
 	* */
-	//SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
+	SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException;
 
 	/**
 	 * @return el esquema nueva vacío
 	 * @throws VaxException
 	 * */
-	//VaccinationSchedule createVaccinationSchedule() throws VaxException;
+	VaccinationSchedule createVaccinationSchedule() throws VaxException;
 
 	/**
 	 * @param id el id del esquema
 	 * @return el esquema de vacunación
 	 * */
-	//VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
+	VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
 
 	/**
 	 * @param name el nombre del centro a buscar
 	 * @return el centro
 	 * */
-	//Optional<Centre> getCentreByName(String name) throws VaxException;
+	Optional<Centre> getCentreByName(String name) throws VaxException;
 
 	/**
 	 * @param staff el staff a actualizar
 	 * @return el staff
 	 * @throws VaxException 
 	 */
-	//SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
+	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 
 	/**
 	 * @param centre el centre a actualizar
 	 * @return el centre
 	 * @throws VaxException 
 	 */
-	//Centre updateCentre(Centre centre);
+	Centre updateCentre(Centre centre) throws VaxException;
 
 	/**
 	 * @param dni el dni del SupportStaff a buscar
 	 * @return el SupportStaff
 	 * */
-	//Optional<SupportStaff> getSupportStaffByDni(String dni);
+	Optional<SupportStaff> getSupportStaffByDni(String dni);
 }
