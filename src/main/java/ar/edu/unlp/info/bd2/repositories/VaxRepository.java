@@ -44,29 +44,25 @@ public class VaxRepository {
         return vaccine;
     }
 
-    /**
-     * This method will update a given object.
-     * If the object do not exist in the database, it will throw an exception.
-     * @param objectToUpdate
-     * @return ObjectToUpdate
-     * @throws VaxException
-     */
-    public Object update(Object objectToUpdate) throws VaxException {
+    public VaccinationSchedule getVaccinationScheduleById(Long id) {
+        VaccinationSchedule vaccinationSchedule;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            session.update(objectToUpdate);
+            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
         } catch (Exception e) {
-            throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+            return null;
         }
-        return objectToUpdate;
+        return vaccinationSchedule;
     }
 
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
+     * 
      * @param objectToSave
      * @throws VaxException
      */
+    
     public void save(Object objectToSave) throws VaxException {
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
@@ -83,5 +79,22 @@ public class VaxRepository {
                 throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
             }
         }
+    }
+
+    /**
+     * This method will update a given object.
+     * If the object do not exist in the database, it will throw an exception.
+     * @param objectToUpdate
+     * @return objectToUpdate
+     * @throws VaxException
+     */
+    public Object update(Object objectToUpdate) throws VaxException {
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            session.update(objectToUpdate);
+        } catch (Exception e) {
+            throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+        }
+        return objectToUpdate;
     }
 }
