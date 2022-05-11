@@ -17,7 +17,7 @@ public class SupportStaff extends Staff {
         this.setDni(dni);
         this.setFullName(fullName);
         this.setArea(area);
-        //this.centres = new ArrayList<>();
+        this.centres = new ArrayList<>();
     }
 
     public String getArea() {

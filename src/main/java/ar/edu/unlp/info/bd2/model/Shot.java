@@ -2,38 +2,51 @@ package ar.edu.unlp.info.bd2.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Shot")
 public class Shot {
-
+    
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Date date;
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name="shotCertificate_id", nullable = false)
     private ShotCertificate shotCertificate;
     @ManyToOne
+    @JoinColumn(name="patient_id", nullable = false)
     private Patient patient;
     @ManyToOne
+    @JoinColumn(name="vaccine_id", nullable = false)
     private Vaccine vaccine;
     @ManyToOne
+    @JoinColumn(name = "nurse_id", nullable = false)
     private Nurse nurse;
     @ManyToOne
+    @JoinColumn(name="centre_id", nullable = false)
     private Centre centre;
+
+    public Shot() {
+    }
 
     public Shot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse){
         this.date = date;
         this.patient = patient;
-        patient.addShot(this);
         this.vaccine = vaccine;
         this.nurse = nurse;
         this.centre = centre;
+        this.setShotCertificate(new ShotCertificate(date));
+        patient.addShot(this);
     }
 
     public Date getDate() {
@@ -49,7 +62,7 @@ public class Shot {
     }
 
     public Long getId() {
-        return this.Id;
+        return this.id;
     }
 
     public void setShotCertificate(ShotCertificate shotCertificate) {

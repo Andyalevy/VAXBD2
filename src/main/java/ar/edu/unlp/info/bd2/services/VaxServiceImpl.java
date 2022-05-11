@@ -41,10 +41,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
         Shot shot = new Shot(patient,vaccine,date,centre,nurse);
-        ShotCertificate shotCertificate = new ShotCertificate(date);
         this.repository.save(shot);
-        this.repository.save(shotCertificate);
-        shot.setShotCertificate(shotCertificate);
         return shot;
     }
 
