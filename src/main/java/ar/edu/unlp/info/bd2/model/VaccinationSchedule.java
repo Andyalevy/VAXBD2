@@ -19,7 +19,7 @@ public class VaccinationSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    private List<Vaccine> vaccines = new ArrayList<Vaccine>();
+    private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
     }
