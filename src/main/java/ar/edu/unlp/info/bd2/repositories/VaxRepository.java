@@ -26,6 +26,25 @@ public class VaxRepository {
         }
         return supportStaff;
     }
+    
+    /**
+     * This method will get the current session, and get a vaccine by the given
+     * name.
+     * 
+     * @param name
+     * @return Optional Vaccine
+     */
+    
+    public Patient getPatientByEmail(String email){
+        Patient patient;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return patient;
+    }
 
     /**
      * This method will get the current session, and get a vaccine by the given name.
