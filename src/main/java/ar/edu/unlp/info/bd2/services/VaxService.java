@@ -87,13 +87,13 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el esquema nueva vacío
 	 * @throws VaxException
 	 * */
-	//VaccinationSchedule createVaccinationSchedule() throws VaxException;
+	VaccinationSchedule createVaccinationSchedule() throws VaxException;
 
 	/**
 	 * @param id el id del esquema
 	 * @return el esquema de vacunación
 	 * */
-	//VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
+	VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
 
 	/**
 	 * @param name el nombre del centro a buscar

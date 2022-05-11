@@ -16,12 +16,12 @@ import javax.persistence.Table;
 public class Centre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name", unique = true)
     private String name;
-    @ManyToMany
-    private List<Staff> staffs = new ArrayList<Staff>();
+    @ManyToMany(mappedBy = "centres")
+    private List<Staff> staffs = new ArrayList<>();
 
     public Centre() {
     }
@@ -29,7 +29,7 @@ public class Centre {
     public Centre(String name) {
         this.name = name;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -53,6 +53,5 @@ public class Centre {
     public void addStaff(Staff worker){
         this.staffs.add(worker);
         worker.addCentre(this);
-    }
-
+    }   
 }

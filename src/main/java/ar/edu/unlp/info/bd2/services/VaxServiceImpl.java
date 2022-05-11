@@ -75,17 +75,17 @@ public class VaxServiceImpl implements VaxService{
         return supportStaff;
     }
 
-    /*@Override
+    @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         this.repository.save(vaccinationSchedule);
         return vaccinationSchedule;
-    }*/
+    }
 
-    /*@Override
+    @Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
         return this.repository.getVaccinationScheduleById(id);
-    }*/
+    }
 
     @Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
