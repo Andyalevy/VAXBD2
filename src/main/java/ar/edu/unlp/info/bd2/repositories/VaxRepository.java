@@ -11,28 +11,69 @@ public class VaxRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    //TODO: Descomentar cuando este implementado Support Staff (linea 3 tambien)
-    /*public SupportStaff getSupportStaffById(long id) throws VaxException {
+    /**
+     * This method will get the current session, and get the supportStaff by the given dni.
+     * @param dni
+     * @return Optional SupportStaff
+     */
+    public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); //Trae o crea sesion activa
-            supportStaff = (SupportStaff)session.createQuery("FROM SupportStaff WHERE Id = :id").setParameter("id", id).uniqueResult();
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni").setParameter("dni", dni).uniqueResult();
         } catch (Exception e) {
-            throw new VaxException("SOMETHING WENT WRONG"); //TODO: esto
+            return null;
         }
         return supportStaff;
-    }*/
+    }
 
     public Centre getCentreByName(String name) {
         Centre centre;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name)
-                    .uniqueResult();
+            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name).uniqueResult();
         } catch (Exception e) {
             return null;
         }
         return centre;
+    }
+
+    public Patient getPatientByEmail(String email){
+        Patient patient;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return patient;
+    }
+
+    /**
+     * This method will get the current session, and get a vaccine by the given name.
+     * @param name
+     * @return Optional Vaccine
+     */
+    public Vaccine getVaccineByName(String name) {
+        Vaccine vaccine;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccine;
+    }
+
+    public VaccinationSchedule getVaccinationScheduleById(Long id) {
+        VaccinationSchedule vaccinationSchedule;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccinationSchedule;
     }
 
     /**
