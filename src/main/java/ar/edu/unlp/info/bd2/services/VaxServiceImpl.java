@@ -1,10 +1,12 @@
 package ar.edu.unlp.info.bd2.services;
 
+import java.util.Date;
+import java.util.Optional;
+
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 //import jdk.jfr.internal.Repository;
-import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.test.annotation.Rollback;
@@ -22,10 +24,12 @@ public class VaxServiceImpl implements VaxService{
     }
 
     //TODO: Descomentar todo a medida que se vaya haciendo, los imports de las lineas 3 y 4 tambien.
-    /*@Override
+    @Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
-        return null;
-    }*/
+        Patient patient = new Patient(email,fullname,password,dayOfBirth);
+        this.repository.save(patient);
+        return patient;
+    }
 
     @Override
     public Vaccine createVaccine(String name) throws VaxException {
@@ -39,10 +43,10 @@ public class VaxServiceImpl implements VaxService{
         return null;
     }*/
 
-    /*@Override
+    @Override
     public Optional<Patient> getPatientByEmail(String email) {
-        return Optional.empty();
-    }*/
+        return Optional.ofNullable(this.repository.getPatientByEmail(email));
+    }
 
     @Override
     //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
@@ -69,17 +73,17 @@ public class VaxServiceImpl implements VaxService{
         return supportStaff;
     }
 
-    @Override
+    /*@Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         this.repository.save(vaccinationSchedule);
         return vaccinationSchedule;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
         return this.repository.getVaccinationScheduleById(id);
-    }
+    }*/
 
     /*@Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {

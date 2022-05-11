@@ -19,7 +19,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el usuario creado
 	 * @throws VaxException
 	 */
-	//Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
+	Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
 
 	/**
 	 *
@@ -47,7 +47,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param email email del usuario
 	 * @return
 	 */
-	//Optional<Patient> getPatientByEmail(String email);
+	Optional<Patient> getPatientByEmail(String email);
 
 
 	/**
@@ -87,13 +87,13 @@ public interface VaxService extends VaxStatisticsService{
 	 * @return el esquema nueva vacío
 	 * @throws VaxException
 	 * */
-	VaccinationSchedule createVaccinationSchedule() throws VaxException;
+	//VaccinationSchedule createVaccinationSchedule() throws VaxException;
 
 	/**
 	 * @param id el id del esquema
 	 * @return el esquema de vacunación
 	 * */
-	VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
+	//VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException;
 
 	/**
 	 * @param name el nombre del centro a buscar
