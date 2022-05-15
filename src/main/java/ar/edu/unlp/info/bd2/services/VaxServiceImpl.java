@@ -14,7 +14,7 @@ import org.springframework.test.annotation.Rollback;
 
 public class VaxServiceImpl implements VaxService{
 
-    //TODO: Revisar si es correcta esta forma de tener el repositorio.
+
 
     private VaxRepository repository;
 
@@ -24,7 +24,7 @@ public class VaxServiceImpl implements VaxService{
         repository = aRepository;
     }
 
-    //TODO: Descomentar todo a medida que se vaya haciendo, los imports de las lineas 3 y 4 tambien.
+
     @Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email,fullname,password,dayOfBirth);

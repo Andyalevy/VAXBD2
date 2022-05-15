@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface VaxService extends VaxStatisticsService{
 
-	//TODO: Descomentar cada metodo a medida que se implementen en VaxServiceImpl, tambien la linea 2 cuando se agregue la carpeta model
+
 
 	/**
 	 *
@@ -36,7 +36,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param date fecha de aplicación
 	 * @param centre el centro de vacunación donde se aplicó
 	 * @param nurse enfermero/a que aplico la vacuna
-	 * @return el usuario creado
+	 * @return el shot creado
 	 * @throws VaxException
 	 */
 	Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
@@ -45,7 +45,7 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 * 
 	 * @param email email del usuario
-	 * @return
+	 * @return el paciente con ese dni
 	 */
 	Optional<Patient> getPatientByEmail(String email);
 
@@ -53,7 +53,7 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 *
 	 * @param name nombre de la vacuna
-	 * @return
+	 * @return la vacuna con ese nombre
 	 */
 	Optional<Vaccine> getVaccineByName(String name);
 
@@ -109,8 +109,8 @@ public interface VaxService extends VaxStatisticsService{
 	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 
 	/**
-	 * @param centre el centre a actualizar
-	 * @return el centre
+	 * @param centre el centro a actualizar
+	 * @return el centro actualizado
 	 * @throws VaxException 
 	 */
 	Centre updateCentre(Centre centre) throws VaxException;

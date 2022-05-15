@@ -11,11 +11,11 @@ public class VaxRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-    // TODO: Descomentar cuando este implementado Support Staff (linea 3 tambien)
+
     /**
      * This method will get the current session, and get the supportStaff by the given dni.
-     * @param dni
-     * @return Optional SupportStaff
+     * @param dni dni del SupportStaff
+     * @return el SupportStaff con ese dni
      */
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
@@ -27,13 +27,13 @@ public class VaxRepository {
         }
         return supportStaff;
     }
-    /*
+
     /**
      * This method will get the current session, and get a vaccine by the given
      * name.
      * 
-     * @param name
-     * @return Optional Vaccine
+     * @param name nombre de la vacuna
+     * @return la vacuna con ese nombre
      */
     public Vaccine getVaccineByName(String name) {
         Vaccine vaccine;
@@ -47,6 +47,11 @@ public class VaxRepository {
         return vaccine;
     }
 
+    /**
+     *
+     * @param name nombre del centro de vacunación
+     * @return el centro de vacunación con ese nombre
+     */
     public Centre getCentreByName(String name) {
         Centre centre;
         try {
@@ -59,6 +64,11 @@ public class VaxRepository {
         return centre;
     }
 
+    /**
+     *
+     * @param email email del usuario
+     * @return el paciente con ese email
+     */
     public Patient getPatientByEmail(String email){
         Patient patient;
         try {
@@ -70,6 +80,11 @@ public class VaxRepository {
         return patient;
     }
 
+    /**
+     *
+     * @param id id de un esquema de vacunación
+     * @return el esquema de vacunación con ese id
+     */
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
         VaccinationSchedule vaccinationSchedule;
         try {
@@ -84,7 +99,7 @@ public class VaxRepository {
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
-     * @param objectToSave
+     * @param objectToSave objeto para guardar
      * @throws VaxException
      */
     public void save(Object objectToSave) throws VaxException {
@@ -100,7 +115,7 @@ public class VaxRepository {
             if (t instanceof ConstraintViolationException) {
                 throw new VaxException("Constraint Violation");
             } else {
-                throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+                throw new VaxException("The table do not exist"); // TODO: esto
             }
         }
     }
@@ -108,8 +123,8 @@ public class VaxRepository {
     /**
      * This method will update a given object.
      * If the object do not exist in the database, it will throw an exception.
-     * @param objectToUpdate
-     * @return objectToUpdate
+     * @param objectToUpdate objeto a actualizar
+     * @return objectToUpdate el objeto actualizado
      * @throws VaxException
      */
     public Object update(Object objectToUpdate) throws VaxException {
@@ -117,7 +132,7 @@ public class VaxRepository {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
             session.update(objectToUpdate);
         } catch (Exception e) {
-            throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+            throw new VaxException("The object do not exist in the database"); // TODO: esto
         }
         return objectToUpdate;
     }
