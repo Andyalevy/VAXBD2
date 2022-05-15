@@ -6,6 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public class VaxRepository {
 
     @Autowired
@@ -95,7 +98,7 @@ public class VaxRepository {
             if (t instanceof ConstraintViolationException) {
                 throw new VaxException("Constraint Violation");
             } else {
-                throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+                throw new VaxException("Exception thrown: " + e.getMessage());
             }
         }
     }
@@ -112,7 +115,7 @@ public class VaxRepository {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
             session.update(objectToUpdate);
         } catch (Exception e) {
-            throw new VaxException("SOMETHING WENT WRONG"); // TODO: esto
+            throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
     }
