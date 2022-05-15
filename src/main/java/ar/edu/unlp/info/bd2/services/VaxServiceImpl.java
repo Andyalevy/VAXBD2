@@ -7,15 +7,11 @@ import java.util.Optional;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-//import jdk.jfr.internal.Repository;
 import javax.transaction.Transactional;
 
 import org.springframework.test.annotation.Rollback;
 
 public class VaxServiceImpl implements VaxService{
-
-    //TODO: Revisar si es correcta esta forma de tener el repositorio.
-
 
     private VaxRepository repository;
 
@@ -25,7 +21,6 @@ public class VaxServiceImpl implements VaxService{
         repository = aRepository;
     }
 
-    //TODO: Descomentar todo a medida que se vaya haciendo, los imports de las lineas 3 y 4 tambien.
     @Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email,fullname,password,dayOfBirth);
@@ -48,12 +43,13 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Rollback
     public Optional<Patient> getPatientByEmail(String email) {
         return Optional.ofNullable(this.repository.getPatientByEmail(email));
     }
 
     @Override
-    //Optional puede ser o no una vacuna. Si no existe ej un paciente te devuelve un optional
+    @Rollback
     public Optional<Vaccine> getVaccineByName(String name) {
         return Optional.ofNullable(this.repository.getVaccineByName(name));
     }
@@ -87,11 +83,13 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Rollback
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
         return this.repository.getVaccinationScheduleById(id);
     }
 
     @Override
+    @Rollback
     public Optional<Centre> getCentreByName(String name) throws VaxException {
         return Optional.ofNullable(this.repository.getCentreByName(name));
     }
@@ -109,7 +107,6 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
-    @Transactional
     @Rollback
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
@@ -124,45 +121,54 @@ public class VaxServiceImpl implements VaxService{
     // ---------------------- VaxStatisticsService ----------------------
 
     @Override
+    @Rollback
     public List<Patient> getAllPatients() {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List<Centre> getCentresTopNStaff(int n) {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public Centre getTopShotCentre() {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List<Nurse> getNurseNotShot() {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public String getLessEmployeesSupportStaffArea() {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List<Staff> getStaffWithName(String name) {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List<Vaccine> getUnappliedVaccines() {
         return null;
     } // TODO: Implementar
 
     @Override
+    @Rollback
     public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) { return null; } // TODO: Implementar
 }
