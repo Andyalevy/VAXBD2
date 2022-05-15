@@ -73,8 +73,7 @@ public class VaxRepository {
         VaccinationSchedule vaccinationSchedule;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            //vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
-            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = " + id.toString()).uniqueResult();
+            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
         } catch (Exception e) {
             return null;
         }
