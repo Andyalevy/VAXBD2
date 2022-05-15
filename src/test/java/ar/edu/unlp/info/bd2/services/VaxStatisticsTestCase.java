@@ -60,11 +60,10 @@ public class VaxStatisticsTestCase {
         }
     }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetAllPatients() {
     	assertEquals(322,this.service.getAllPatients().size());
-    }*/
+    }
 
     // TODO: Descomentar
     /*@Test

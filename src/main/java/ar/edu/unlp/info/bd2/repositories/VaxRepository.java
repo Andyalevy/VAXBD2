@@ -7,6 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public class VaxRepository {
@@ -72,7 +73,8 @@ public class VaxRepository {
         VaccinationSchedule vaccinationSchedule;
         try {
             Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
-            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+            //vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = " + id.toString()).uniqueResult();
         } catch (Exception e) {
             return null;
         }
@@ -118,5 +120,20 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    /**
+     *
+     * @return Lista con todos los pacientes.
+     */
+    public List<Patient> getAllPatients() {
+        List<Patient> patientList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            patientList = (List<Patient>) session.createQuery("FROM Patient").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return patientList;
     }
 }

@@ -123,7 +123,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Patient> getAllPatients() {
-        return null;
+        return this.repository.getAllPatients();
     }
 
     @Override
