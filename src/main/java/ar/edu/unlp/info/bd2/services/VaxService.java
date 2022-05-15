@@ -104,20 +104,29 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 * @param staff el staff a actualizar
 	 * @return el staff
-	 * @throws VaxException 
+	 * @throws VaxException excepción al fallar.
 	 */
 	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 
 	/**
 	 * @param centre el centre a actualizar
 	 * @return el centre
-	 * @throws VaxException 
+	 * @throws VaxException excepción al fallar.
 	 */
 	Centre updateCentre(Centre centre) throws VaxException;
 
 	/**
-	 * @param dni el dni del SupportStaff a buscar
+	 * @param dni el dni del SupportStaff a buscar.
 	 * @return el SupportStaff
 	 * */
 	Optional<SupportStaff> getSupportStaffByDni(String dni);
+
+	/**
+	 * @param vaccinationSchedule el vaccination schedule que se va a actualizar.
+	 *
+	 * @return el mismo vaccination schedule.
+	 *
+	 * @throws VaxException excepción al fallar.
+	 */
+	VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException;
 }

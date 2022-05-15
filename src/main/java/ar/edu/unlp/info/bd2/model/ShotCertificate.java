@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class ShotCertificate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long serialNumber;
     private Date date;
 

@@ -1,6 +1,7 @@
 package ar.edu.unlp.info.bd2.services;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unlp.info.bd2.model.*;
@@ -14,6 +15,7 @@ import org.springframework.test.annotation.Rollback;
 public class VaxServiceImpl implements VaxService{
 
     //TODO: Revisar si es correcta esta forma de tener el repositorio.
+
 
     private VaxRepository repository;
 
@@ -112,4 +114,55 @@ public class VaxServiceImpl implements VaxService{
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
     }
+
+    @Override
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
+        this.repository.update(vaccinationSchedule);
+        return vaccinationSchedule;
+    }
+
+    // ---------------------- VaxStatisticsService ----------------------
+
+    @Override
+    public List<Patient> getAllPatients() {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List<Centre> getCentresTopNStaff(int n) {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public Centre getTopShotCentre() {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List<Nurse> getNurseNotShot() {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public String getLessEmployeesSupportStaffArea() {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List<Staff> getStaffWithName(String name) {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List<Vaccine> getUnappliedVaccines() {
+        return null;
+    } // TODO: Implementar
+
+    @Override
+    public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) { return null; } // TODO: Implementar
 }
