@@ -16,8 +16,8 @@ public class VaxRepository {
 
     /**
      * This method will get the current session, and get the supportStaff by the given dni.
-     * @param dni
-     * @return Optional SupportStaff
+     * @param dni dni del SupportStaff
+     * @return un SupportStaff con ese dni
      */
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
@@ -54,8 +54,8 @@ public class VaxRepository {
 
     /**
      * This method will get the current session, and get a vaccine by the given name.
-     * @param name
-     * @return Optional Vaccine
+     * @param name nombre de la vacuna
+     * @return la vacuna con ese nombre
      */
     public Vaccine getVaccineByName(String name) {
         Vaccine vaccine;
@@ -68,6 +68,11 @@ public class VaxRepository {
         return vaccine;
     }
 
+    /**
+     *
+     * @param id id del esquma de vacunación
+     * @return el esquema de vacunación con ese id
+     */
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
         VaccinationSchedule vaccinationSchedule;
         try {
@@ -82,7 +87,7 @@ public class VaxRepository {
     /**
      * This method will save any given object.
      * If the table do not exist it will throw an exception.
-     * @param objectToSave
+     * @param objectToSave objecto a guardar
      * @throws VaxException
      */
     public void save(Object objectToSave) throws VaxException {
@@ -106,8 +111,8 @@ public class VaxRepository {
     /**
      * This method will update a given object.
      * If the object do not exist in the database, it will throw an exception.
-     * @param objectToUpdate
-     * @return objectToUpdate
+     * @param objectToUpdate objeto para actualizar
+     * @return objectToUpdate el objeto actualizado
      * @throws VaxException
      */
     public Object update(Object objectToUpdate) throws VaxException {
