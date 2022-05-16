@@ -129,8 +129,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getNurseWithMoreThanNYearsExperience(years);
+    } 
 
     @Override
     @Rollback
