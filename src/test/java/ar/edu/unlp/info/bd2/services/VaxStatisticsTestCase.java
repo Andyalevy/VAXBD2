@@ -66,7 +66,6 @@ public class VaxStatisticsTestCase {
     	assertEquals(322,this.service.getAllPatients().size());
     }*/
 
-    // TODO: Descomentar
     @Test
     public void testGetNurseWithMoreThanNYearsExperience() {
     	List<Nurse> nurses =this.service.getNurseWithMoreThanNYearsExperience(9); 

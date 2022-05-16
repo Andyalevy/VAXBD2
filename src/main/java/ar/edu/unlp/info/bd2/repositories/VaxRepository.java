@@ -122,6 +122,12 @@ public class VaxRepository {
         return objectToUpdate;
     }
 
+    /**
+     * This method will return a list with the nurses that have more than the given years of experience
+     * 
+     * @param years numero de años de experienca
+     * @return Lista con todos los Nurse que tengan más años de experiencia que years
+     */
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
         List<Nurse> nurseList;
         try {
