@@ -122,6 +122,10 @@ public class VaxRepository {
         return objectToUpdate;
     }
 
+    /**
+     * This method will get All vacine except the ones that have been applied
+     * @return list of unapplied vaccines
+     */
     public List<Vaccine> getUnappliedVaccines(){
         List<Vaccine> vaccineList;
         try {
