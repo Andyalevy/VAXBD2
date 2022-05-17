@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 @Transactional
@@ -118,5 +120,16 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    public List<Vaccine> getUnappliedVaccines(){
+        List<Vaccine> vaccineList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession(); 
+            vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccineList;
     }
 }
