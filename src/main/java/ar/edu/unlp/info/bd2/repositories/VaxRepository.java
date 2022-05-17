@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 @Transactional
@@ -118,5 +120,21 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    /**
+     * 
+     * @param n
+     * @return
+     */
+    public List<Centre> getCentresTopNStaff(int n){
+        List<Centre> centreList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            //todo: consulta
+        } catch (Exception e) {
+            return null;
+        }
+        return centreList;
     }
 }
