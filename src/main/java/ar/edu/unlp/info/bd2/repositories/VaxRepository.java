@@ -122,11 +122,22 @@ public class VaxRepository {
         return objectToUpdate;
     }
 
+    /**
+     *  This method will retrieve all the shot certificates that happened between startDate and endDate.
+     *
+     * @param startDate
+     *
+     * @param endDate
+     *
+     * @return List of ShotCertificate which happened between startDate and endDate.
+     */
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
         List<ShotCertificate> shotList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            shotList = (List<ShotCertificate>) session.createQuery("FROM ShotCertificate WHERE date BETWEEN :startDate AND :endDate").setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+            shotList = (List<ShotCertificate>) session.createQuery(
+                    "FROM ShotCertificate WHERE date BETWEEN :startDate AND :endDate")
+                    .setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
         } catch (Exception e) {
             return null;
         }
