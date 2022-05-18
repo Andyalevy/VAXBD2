@@ -170,5 +170,7 @@ public class VaxServiceImpl implements VaxService{
 
     @Override
     @Rollback
-    public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) { return null; } // TODO: Implementar
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        return this.repository.getShotCertificatesBetweenDates(startDate, endDate);
+    }
 }
