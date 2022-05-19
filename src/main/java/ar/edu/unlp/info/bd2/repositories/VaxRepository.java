@@ -7,6 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public class VaxRepository {
@@ -118,5 +119,20 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    /**
+     *
+     * @return Lista con todos los support Staff.
+     */
+    public List<SupportStaff> getAllSupportStaff() {
+        List<SupportStaff> supportStaffList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            supportStaffList = (List<SupportStaff>) session.createQuery("FROM SupportStaff").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return supportStaffList;
     }
 }
