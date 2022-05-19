@@ -152,29 +152,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public String getLessEmployeesSupportStaffArea() {
-        List<SupportStaff> supportStaffList;
-        supportStaffList = this.repository.getAllSupportStaff();
-        // Se declara un mapa de string a entero para contar la cantidad de veces que aparece cada area.
-        HashMap<String, Integer> employeesByArea = new HashMap<>();
-        for (SupportStaff supportStaff : supportStaffList) {
-            String area = supportStaff.getArea();
-            // Si el area estaba, se le suma 1 al valor, sino se agrega con un 1.
-            if (employeesByArea.containsKey(area)) {
-                employeesByArea.replace(area, employeesByArea.get(area) + 1);
-            } else {
-                employeesByArea.put(area, 1);
-            }
-        }
-        // Una vez se tiene el mapa con la cantidad de apariciones, se recorre una vez el mapa para quedarse con el area que menos apariciones tuvo.
-        AtomicReference<String> minArea = new AtomicReference<String>();
-        AtomicInteger minAreaValue = new AtomicInteger(Integer.MAX_VALUE);
-        employeesByArea.forEach((a, v)-> {
-            if (v < minAreaValue.get()) {
-                minArea.set(a);
-                minAreaValue.set(v);
-            }
-        });
-        return minArea.toString();
+        return this.repository.getLessEmployeesAreaSupportStaffArea();
     }
 
     @Override

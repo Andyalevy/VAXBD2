@@ -123,16 +123,20 @@ public class VaxRepository {
 
     /**
      *
-     * @return Lista con todos los support Staff.
+     * @return Area con menos empleados de los support Staff.
      */
-    public List<SupportStaff> getAllSupportStaff() {
-        List<SupportStaff> supportStaffList;
+    public String getLessEmployeesAreaSupportStaffArea() {
+        String supportStaffAreaWithLeastEmployees;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            supportStaffList = (List<SupportStaff>) session.createQuery("FROM SupportStaff").getResultList();
+            supportStaffAreaWithLeastEmployees = (String) session.createQuery(
+                    "SELECT ss.area " +
+                            "FROM SupportStaff ss " +
+                            "GROUP BY ss.area " +
+                            "ORDER BY count(ss.area) ASC").setMaxResults(1).uniqueResult();
         } catch (Exception e) {
             return null;
         }
-        return supportStaffList;
+        return supportStaffAreaWithLeastEmployees;
     }
 }
