@@ -119,4 +119,18 @@ public class VaxRepository {
         }
         return objectToUpdate;
     }
+
+    /**
+     *
+     */
+    public Centre getTopShotCentre(){
+        Centre cen;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            cen= (Centre) session.createQuery("SELECT c.id FROM Centre c INNER JOIN Shot s ON (c.id = s.centre) GROUP BY c.id ORDER BY COUNT(c.id) DESC",Centre.class).uniqueResult();
+        } catch (Exception e) {
+            throw null;
+        }
+        return cen;
+    }
 }

@@ -83,11 +83,11 @@ public class VaxStatisticsTestCase {
     }*/
 
     // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetTopShotCentre() {
     	Centre centre = this.service.getTopShotCentre();
     	assertEquals("Hospital de Romero",centre.getName());
-    }*/
+    }
 
     // TODO: Descomentar
     /*@Test

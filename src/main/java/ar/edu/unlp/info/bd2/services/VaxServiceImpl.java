@@ -141,8 +141,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Centre getTopShotCentre() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getTopShotCentre();
+    }
 
     @Override
     @Rollback
