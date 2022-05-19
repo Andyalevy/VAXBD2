@@ -82,7 +82,6 @@ public class VaxStatisticsTestCase {
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
     }*/
 
-    // TODO: Descomentar
     @Test
     public void testGetTopShotCentre() {
     	Centre centre = this.service.getTopShotCentre();

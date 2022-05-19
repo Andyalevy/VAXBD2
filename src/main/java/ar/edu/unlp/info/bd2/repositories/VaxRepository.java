@@ -122,12 +122,13 @@ public class VaxRepository {
 
     /**
      *
+     * @return el centro que más vacunas aplicó
      */
     public Centre getTopShotCentre(){
         Centre cen;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            cen= (Centre) session.createQuery("SELECT c.id FROM Centre c INNER JOIN Shot s ON (c.id = s.centre) GROUP BY c.id ORDER BY COUNT(c.id) DESC",Centre.class).uniqueResult();
+            cen= (Centre) session.createQuery("SELECT s.centre FROM Shot s INNER JOIN Centre c ON s.centre.id=c.id GROUP BY s.centre ORDER BY count(s.centre.id) DESC",Centre.class).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             throw null;
         }
