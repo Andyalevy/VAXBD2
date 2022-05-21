@@ -122,8 +122,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Patient> getAllPatients() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getAllPatients();
+    }
 
     @Override
     @Rollback

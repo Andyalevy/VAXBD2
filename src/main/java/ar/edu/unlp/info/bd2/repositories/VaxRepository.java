@@ -185,4 +185,19 @@ public class VaxRepository {
         }
         return centreList;
     }
+
+    /**
+     *
+     * @return Lista con todos los pacientes.
+     */
+    public List<Patient> getAllPatients() {
+        List<Patient> patientList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            patientList = (List<Patient>) session.createQuery("FROM Patient").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return patientList;
+    }
 }
