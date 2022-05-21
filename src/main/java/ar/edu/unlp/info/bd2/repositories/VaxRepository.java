@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Transactional
 public class VaxRepository {
