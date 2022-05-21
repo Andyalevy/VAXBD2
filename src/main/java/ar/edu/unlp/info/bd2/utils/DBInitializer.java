@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 
+import javax.transaction.Transactional;
+
 public class DBInitializer {
 
     @Autowired
     VaxService service;
 
+    @Transactional
     public void prepareDB() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Vaccine vaccine001 = service.createVaccine("Pfizer");
