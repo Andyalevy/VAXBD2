@@ -123,9 +123,10 @@ public class VaxRepository {
     }
 
     /**
+     * This function will return a list of the given lenght of the Centres with most Staff
      * 
-     * @param n
-     * @return
+     * @param n number of elements to return
+     * @return list of the Centres with more staff limit by n 
      */
     public List<Centre> getCentresTopNStaff(int n){
         List<Centre> centreList;
