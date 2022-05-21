@@ -121,24 +121,55 @@ public class VaxRepository {
         }
         return objectToUpdate;
     }
-
     /**
-     * This function will return a list of the given lenght of the Centres with most Staff
-     * 
-     * @param n number of elements to return
-     * @return list of the Centres with more staff limit by n 
+     * This method will return a list with the nurses that have more than the given years of experience
+     *
+     * @param years numero de años de experienca
+     * @return Lista con todos los Nurse que tengan más años de experiencia que years
      */
-    public List<Centre> getCentresTopNStaff(int n){
-        List<Centre> centreList;
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
+        List<Nurse> nurseList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            centreList = (List<Centre>) session.createQuery("SELECT c "+ 
-                                                            "FROM Staff s JOIN s.centres c "+
-                                                            "GROUP BY c "+
-                                                            "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+            nurseList = (List<Nurse>) session.createQuery("FROM Nurse WHERE Experience > :years").setParameter("years", years).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return centreList;
+        return nurseList;
     }
+
+    /**
+     * This method will get All vacine except the ones that have been applied
+     * @return list of unapplied vaccines
+     */
+    public List<Vaccine> getUnappliedVaccines() {
+        List<Vaccine> vaccineList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccineList;
+    }
+
+/**
+ * This function will return a list of the given lenght of the Centres with most Staff
+ *
+ * @param n number of elements to return
+ * @return list of the Centres with more staff limit by n
+ */
+public List<Centre> getCentresTopNStaff(int n){
+        List<Centre> centreList;
+        try {
+        Session session = this.sessionFactory.getCurrentSession();
+        centreList = (List<Centre>) session.createQuery("SELECT c "+
+        "FROM Staff s JOIN s.centres c "+
+        "GROUP BY c "+
+        "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+        } catch (Exception e) {
+        return null;
+        }
+        return centreList;
+        }
 }
