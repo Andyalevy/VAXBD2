@@ -158,8 +158,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Staff> getStaffWithName(String name) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getStaffWithName(name);
+    }
 
     @Override
     @Rollback

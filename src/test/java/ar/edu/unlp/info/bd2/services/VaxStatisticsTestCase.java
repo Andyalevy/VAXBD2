@@ -103,13 +103,13 @@ public class VaxStatisticsTestCase {
     	assertEquals("Observaciones",area);
     }*/
 
-    // TODO: Descomentar
-    /*@Test
+
+    @Test
     public void testGetStaffWithName() {
     	List<Staff> staffs = this.service.getStaffWithName("Hernández");
     	assertEquals(3,staffs.size());
     	this.assertListEquality(staffs.stream().map(property -> property.getFullName()).collect(Collectors.toList()), Arrays.asList("Ceasar Hernández","Kasim Hernández","Modesty Hernández"));
-    }*/
+    }
 
     @Test
     public void testGetUnappliedVaccines() {

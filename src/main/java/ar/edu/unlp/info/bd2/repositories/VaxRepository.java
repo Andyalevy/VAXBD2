@@ -133,7 +133,7 @@ public class VaxRepository {
         }
         return objectToUpdate;
     }
-    
+
     /**
      * This method will return a list with the nurses that have more than the given years of experience
      *
@@ -199,5 +199,21 @@ public class VaxRepository {
             return null;
         }
         return patientList;
+    }
+
+    /**
+     *
+     * @param name nombre de los/as empleados/as
+     * @return enfermeros/as con ese nombre
+     */
+    public List<Staff> getStaffWithName(String name) {
+        List<Staff> staffList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            staffList = (List<Staff>) session.createQuery("FROM Staff s WHERE s.fullName LIKE '%" + name + "%'").getResultList();
+        } catch (Exception e) {
+            throw null;
+        }
+        return staffList;
     }
 }
