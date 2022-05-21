@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 @Transactional
@@ -118,5 +120,22 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    /**
+     * This method will return a list with the nurses that have more than the given years of experience
+     * 
+     * @param years numero de años de experienca
+     * @return Lista con todos los Nurse que tengan más años de experiencia que years
+     */
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
+        List<Nurse> nurseList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            nurseList = (List<Nurse>) session.createQuery("FROM Nurse WHERE Experience > :years").setParameter("years", years).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return nurseList;
     }
 }

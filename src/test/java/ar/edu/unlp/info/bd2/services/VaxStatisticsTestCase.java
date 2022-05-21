@@ -66,13 +66,12 @@ public class VaxStatisticsTestCase {
     	assertEquals(322,this.service.getAllPatients().size());
     }*/
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetNurseWithMoreThanNYearsExperience() {
     	List<Nurse> nurses =this.service.getNurseWithMoreThanNYearsExperience(9); 
     	assertEquals(4,nurses.size());
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
-    }*/
+    }
 
     // TODO: Descomentar
     /*@Test
