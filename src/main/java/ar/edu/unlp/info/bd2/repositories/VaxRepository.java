@@ -129,12 +129,16 @@ public class VaxRepository {
      */
     public List<Centre> getCentresTopNStaff(int n){
         List<Centre> centreList;
-        try {
+        //try {
             Session session = this.sessionFactory.getCurrentSession();
-            //todo: consulta
-        } catch (Exception e) {
-            return null;
-        }
+            centreList = (List<Centre>) session.createQuery("SELECT c "+ 
+                                                            "FROM Staff s JOIN s.centres c "+
+                                                            "GROUP BY c "+
+                                                            "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+            //centreList = (List<Centre>) session.createQuery("select c.name From Centre c JOIN c.staffs s GROUP BY c.name ORDER BY count(s) ").setMaxResults(n).getResultList();
+        //} catch (Exception e) {
+        //    return null;
+        //}
         return centreList;
     }
 }
