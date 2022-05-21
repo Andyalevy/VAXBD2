@@ -22,7 +22,7 @@ public class VaxRepository {
     public SupportStaff getSupportStaffByDni(String dni) {
         SupportStaff supportStaff;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni").setParameter("dni", dni).uniqueResult();
         } catch (Exception e) {
             return null;
@@ -30,10 +30,14 @@ public class VaxRepository {
         return supportStaff;
     }
 
+    /**
+     * @param name nombre del centro
+     * @return el centro que tiene ese nombre
+     */
     public Centre getCentreByName(String name) {
         Centre centre;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name).uniqueResult();
         } catch (Exception e) {
             return null;
@@ -41,10 +45,14 @@ public class VaxRepository {
         return centre;
     }
 
+    /**
+     * @param email correo electrónico del paciente
+     * @return el paciente que tiene ese correo electrónico
+     */
     public Patient getPatientByEmail(String email){
         Patient patient;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
         } catch (Exception e) {
             return null;
@@ -60,7 +68,7 @@ public class VaxRepository {
     public Vaccine getVaccineByName(String name) {
         Vaccine vaccine;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name).uniqueResult();
         } catch (Exception e) {
             return null;
@@ -69,14 +77,13 @@ public class VaxRepository {
     }
 
     /**
-     *
      * @param id id del esquma de vacunación
      * @return el esquema de vacunación con ese id
      */
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
         VaccinationSchedule vaccinationSchedule;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession(); //
             vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
         } catch (Exception e) {
             return null;
@@ -92,7 +99,7 @@ public class VaxRepository {
      */
     public void save(Object objectToSave) throws VaxException {
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             session.save(objectToSave);
             session.flush();
         } catch (Exception e) {
@@ -117,7 +124,7 @@ public class VaxRepository {
      */
     public Object update(Object objectToUpdate) throws VaxException {
         try {
-            Session session = this.sessionFactory.getCurrentSession(); // Trae o crea sesion activa
+            Session session = this.sessionFactory.getCurrentSession();
             session.update(objectToUpdate);
         } catch (Exception e) {
             throw new VaxException("Exception thrown: " + e.getMessage());
