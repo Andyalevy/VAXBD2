@@ -124,7 +124,7 @@ public class VaxRepository {
 
     /**
      * This method will return a list with the nurses that have more than the given years of experience
-     * 
+     *
      * @param years numero de años de experienca
      * @return Lista con todos los Nurse que tengan más años de experiencia que years
      */
@@ -137,5 +137,20 @@ public class VaxRepository {
             return null;
         }
         return nurseList;
+    }
+
+    /**
+     * This method will get All vacine except the ones that have been applied
+     * @return list of unapplied vaccines
+     */
+    public List<Vaccine> getUnappliedVaccines() {
+        List<Vaccine> vaccineList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return vaccineList;
     }
 }
