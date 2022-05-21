@@ -73,13 +73,12 @@ public class VaxStatisticsTestCase {
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
     }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetCentresTopNStaff() {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
     	assertEquals(5,centres.size());
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
-    }*/
+    }
 
     // TODO: Descomentar
     /*@Test

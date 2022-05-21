@@ -134,8 +134,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Centre> getCentresTopNStaff(int n) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getCentresTopNStaff(n);
+    }
 
     @Override
     @Rollback

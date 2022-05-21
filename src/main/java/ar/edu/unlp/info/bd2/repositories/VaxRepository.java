@@ -121,7 +121,7 @@ public class VaxRepository {
         }
         return objectToUpdate;
     }
-
+    
     /**
      * This method will return a list with the nurses that have more than the given years of experience
      *
@@ -152,5 +152,25 @@ public class VaxRepository {
             return null;
         }
         return vaccineList;
+    }
+
+    /**
+     * This function will return a list of the given lenght of the Centres with most Staff
+     *
+     * @param n number of elements to return
+     * @return list of the Centres with more staff limit by n
+     */
+    public List<Centre> getCentresTopNStaff(int n) {
+        List<Centre> centreList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            centreList = (List<Centre>) session.createQuery("SELECT c " +
+                    "FROM Staff s JOIN s.centres c " +
+                    "GROUP BY c " +
+                    "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return centreList;
     }
 }
