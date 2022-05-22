@@ -60,27 +60,24 @@ public class VaxStatisticsTestCase {
         }
     }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetAllPatients() {
     	assertEquals(322,this.service.getAllPatients().size());
-    }*/
+    }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetNurseWithMoreThanNYearsExperience() {
     	List<Nurse> nurses =this.service.getNurseWithMoreThanNYearsExperience(9); 
     	assertEquals(4,nurses.size());
     	this.assertListEquality(nurses.stream().map(property -> property.getFullName()).collect(Collectors.toList()),Arrays.asList("Arneris Ibáñez","Emir Vidal","Cornelio Sánchez","Kristin Vega"));
-    }*/
+    }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetCentresTopNStaff() {
     	List<Centre> centres = this.service.getCentresTopNStaff(5);
     	assertEquals(5,centres.size());
     	this.assertListEquality(centres.stream().map(property -> property.getName()).collect(Collectors.toList()), Arrays.asList("Hospital San Juan de Dios","SADOP","PAMI","ATE","Abasto"));
-    }*/
+    }
 
     // TODO: Descomentar
     /*@Test
@@ -98,31 +95,28 @@ public class VaxStatisticsTestCase {
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
     }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetLessEmployeesSupportStaffArea() {
     	String area = this.service.getLessEmployeesSupportStaffArea();
     	assertEquals("Observaciones",area);
-    }*/
+    }
 
-    // TODO: Descomentar
-    /*@Test
+
+    @Test
     public void testGetStaffWithName() {
     	List<Staff> staffs = this.service.getStaffWithName("Hernández");
     	assertEquals(3,staffs.size());
     	this.assertListEquality(staffs.stream().map(property -> property.getFullName()).collect(Collectors.toList()), Arrays.asList("Ceasar Hernández","Kasim Hernández","Modesty Hernández"));
-    }*/
+    }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetUnappliedVaccines() {
     	List<Vaccine> vaccines = this.service.getUnappliedVaccines();
     	assertEquals(1,vaccines.size());
     	assertEquals("Bharat",vaccines.get(0).getName());
-    }*/
+    }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetShotCertificatesBetweenDates() {
     	List<ShotCertificate> certificates;
 		try {
@@ -132,6 +126,5 @@ public class VaxStatisticsTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-    }*/
+    }
 }

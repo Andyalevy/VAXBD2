@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface VaxService extends VaxStatisticsService{
 
-	//TODO: Descomentar cada metodo a medida que se implementen en VaxServiceImpl, tambien la linea 2 cuando se agregue la carpeta model
+
 
 	/**
 	 *
@@ -17,7 +17,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param password clave con la que el usuario ingresa al sitio
 	 * @param dayOfBirth fecha de nacimiento del usuario
 	 * @return el usuario creado
-	 * @throws VaxException
+	 * @throws VaxException excepción al fallar
 	 */
 	Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException;
 
@@ -25,7 +25,7 @@ public interface VaxService extends VaxStatisticsService{
 	 *
 	 * @param name nombre de la vacuna
 	 * @return la vacuna creada
-	 * @throws VaxException
+	 * @throws VaxException excepción al fallar
 	 */
 	Vaccine createVaccine(String name) throws VaxException;
 
@@ -36,8 +36,8 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param date fecha de aplicación
 	 * @param centre el centro de vacunación donde se aplicó
 	 * @param nurse enfermero/a que aplico la vacuna
-	 * @return el usuario creado
-	 * @throws VaxException
+	 * @return el shot creado
+	 * @throws VaxException excepción al fallar
 	 */
 	Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException;
 	
@@ -45,7 +45,7 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 * 
 	 * @param email email del usuario
-	 * @return
+	 * @return el paciente que tiene ese mail
 	 */
 	Optional<Patient> getPatientByEmail(String email);
 
@@ -53,7 +53,7 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 *
 	 * @param name nombre de la vacuna
-	 * @return
+	 * @return la vacuna con ese nombre
 	 */
 	Optional<Vaccine> getVaccineByName(String name);
 
@@ -61,7 +61,7 @@ public interface VaxService extends VaxStatisticsService{
 	 *
 	 * @param name nombre del centro de vacunación
 	 * @return el centro de vacunación nuevo
-	 * @throws VaxException
+	 * @throws VaxException excepción al fallar
 	 */
 	Centre createCentre(String name) throws VaxException;
 
@@ -70,7 +70,7 @@ public interface VaxService extends VaxStatisticsService{
 	 * @param fullName nombre del/la enfermero/a
 	 * @param experience experiencia en años
 	 * @return el enfermero creado
-	 * @throws VaxException
+	 * @throws VaxException excepción al fallar
 	 */
 	Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException;
 
@@ -85,7 +85,7 @@ public interface VaxService extends VaxStatisticsService{
 
 	/**
 	 * @return el esquema nueva vacío
-	 * @throws VaxException
+	 * @throws VaxException excepción al fallar
 	 * */
 	VaccinationSchedule createVaccinationSchedule() throws VaxException;
 
@@ -104,7 +104,7 @@ public interface VaxService extends VaxStatisticsService{
 	/**
 	 * @param staff el staff a actualizar
 	 * @return el staff
-	 * @throws VaxException excepción al fallar.
+	 * @throws VaxException excepción al fallar
 	 */
 	SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException;
 
