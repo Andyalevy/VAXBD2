@@ -152,8 +152,9 @@ public class VaxRepository {
     }
 
     /**
-    * @return Los enfermeros que no aplicaron vacunas
-    */
+     *
+     * @return Los enfermeros que no aplicaron vacunas
+     */
     public List<Nurse> getNurseNotShot(){
         List<Nurse> nurseList;
         try {
