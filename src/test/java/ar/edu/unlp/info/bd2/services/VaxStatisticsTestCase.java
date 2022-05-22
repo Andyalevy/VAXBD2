@@ -117,8 +117,7 @@ public class VaxStatisticsTestCase {
     	assertEquals("Bharat",vaccines.get(0).getName());
     }
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetShotCertificatesBetweenDates() {
     	List<ShotCertificate> certificates;
 		try {
@@ -128,6 +127,5 @@ public class VaxStatisticsTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-    }*/
+    }
 }
