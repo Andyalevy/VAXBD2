@@ -7,7 +7,6 @@ import java.util.Optional;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import javax.transaction.Transactional;
 
 import org.springframework.test.annotation.Rollback;
 
@@ -123,20 +122,20 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Patient> getAllPatients() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getAllPatients();
+    }
 
     @Override
     @Rollback
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getNurseWithMoreThanNYearsExperience(years);
+    } 
 
     @Override
     @Rollback
     public List<Centre> getCentresTopNStaff(int n) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getCentresTopNStaff(n);
+    }
 
     @Override
     @Rollback
@@ -147,28 +146,30 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Nurse> getNurseNotShot() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getNurseNotShot();
+    }
 
     @Override
     @Rollback
     public String getLessEmployeesSupportStaffArea() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getLessEmployeesAreaSupportStaffArea();
+    }
 
     @Override
     @Rollback
     public List<Staff> getStaffWithName(String name) {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getStaffWithName(name);
+    }
 
     @Override
     @Rollback
     public List<Vaccine> getUnappliedVaccines() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getUnappliedVaccines();
+    }
 
     @Override
     @Rollback
-    public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) { return null; } // TODO: Implementar
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        return this.repository.getShotCertificatesBetweenDates(startDate, endDate);
+    }
 }
