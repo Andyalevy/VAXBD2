@@ -96,12 +96,11 @@ public class VaxStatisticsTestCase {
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
     }*/
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetLessEmployeesSupportStaffArea() {
     	String area = this.service.getLessEmployeesSupportStaffArea();
     	assertEquals("Observaciones",area);
-    }*/
+    }
 
 
     @Test

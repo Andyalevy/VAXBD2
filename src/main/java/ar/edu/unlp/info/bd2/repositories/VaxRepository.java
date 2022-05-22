@@ -216,4 +216,23 @@ public class VaxRepository {
         }
         return staffList;
     }
+
+    /**
+     *
+     * @return Area con menos empleados de los support Staff.
+     */
+    public String getLessEmployeesAreaSupportStaffArea() {
+        String supportStaffAreaWithLeastEmployees;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            supportStaffAreaWithLeastEmployees = (String) session.createQuery(
+                    "SELECT ss.area " +
+                            "FROM SupportStaff ss " +
+                            "GROUP BY ss.area " +
+                            "ORDER BY count(ss.area) ASC").setMaxResults(1).uniqueResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return supportStaffAreaWithLeastEmployees;
+    }
 }

@@ -152,8 +152,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public String getLessEmployeesSupportStaffArea() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getLessEmployeesAreaSupportStaffArea();
+    }
 
     @Override
     @Rollback
