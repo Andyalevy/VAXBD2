@@ -86,15 +86,14 @@ public class VaxStatisticsTestCase {
     	assertEquals("Hospital de Romero",centre.getName());
     }*/
 
-    // TODO: Descomentar
-    /*@Test
+    @Test
     public void testGetNurseNotShot() {
     	List<Nurse> nurses = this.service.getNurseNotShot();
     	assertEquals(1,nurses.size());
     	assertEquals("Kristin Vega",nurses.get(0).getFullName());
     	assertEquals("46768509",nurses.get(0).getDni());
     	assertEquals(Integer.valueOf(10),nurses.get(0).getExperience());
-    }*/
+    }
 
     @Test
     public void testGetLessEmployeesSupportStaffArea() {

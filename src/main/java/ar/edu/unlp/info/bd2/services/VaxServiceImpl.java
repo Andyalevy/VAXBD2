@@ -146,8 +146,8 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public List<Nurse> getNurseNotShot() {
-        return null;
-    } // TODO: Implementar
+        return this.repository.getNurseNotShot();
+    }
 
     @Override
     @Rollback

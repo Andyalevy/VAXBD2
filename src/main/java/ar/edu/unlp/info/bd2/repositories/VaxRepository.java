@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 import java.util.List;
 import java.util.Date;
@@ -133,6 +134,21 @@ public class VaxRepository {
             throw new VaxException("Exception thrown: " + e.getMessage());
         }
         return objectToUpdate;
+    }
+
+    /**
+     *
+     * @return Los enfermeros que no aplicaron vacunas
+     */
+    public List<Nurse> getNurseNotShot(){
+        List<Nurse> nurseList;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            nurseList= (List<Nurse>) session.createQuery("FROM Nurse Nu WHERE Nu.id NOT IN(SELECT s.nurse.id FROM Shot s)").list();
+        } catch (Exception e) {
+            throw null;
+        }
+        return nurseList;
     }
 
     /**
