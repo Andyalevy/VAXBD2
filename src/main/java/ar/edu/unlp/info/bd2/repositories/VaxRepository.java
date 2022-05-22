@@ -138,6 +138,21 @@ public class VaxRepository {
 
     /**
      *
+     * @return el centro que más vacunas aplicó
+     */
+    public Centre getTopShotCentre() {
+        Centre cen;
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            cen = (Centre) session.createQuery("SELECT s.centre FROM Shot s INNER JOIN Centre c ON s.centre.id=c.id GROUP BY s.centre ORDER BY count(s.centre.id) DESC", Centre.class).setMaxResults(1).getSingleResult();
+        } catch (Exception e) {
+            throw null;
+        }
+        return cen;
+    }
+
+    /**
+     *
      * @return Los enfermeros que no aplicaron vacunas
      */
     public List<Nurse> getNurseNotShot(){
