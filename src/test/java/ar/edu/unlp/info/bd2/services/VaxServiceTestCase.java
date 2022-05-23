@@ -27,8 +27,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VaxServiceTestCase {
 	private Date dob;
 
-    @Autowired
-    VaxService service;
+	@Autowired
+	VaxService service;
 
 	@BeforeEach
 	public void setUp() throws VaxException{
@@ -39,23 +39,23 @@ public class VaxServiceTestCase {
 		dob = cal.getTime();
 	}
 
-    @Test
-    public void testCreatePatient() throws VaxException{
+	@Test
+	public void testCreatePatient() throws VaxException{
 		Patient fede = this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob);
-    	assertNotNull (fede.getId());
-    	assertEquals("Federico Orlando", fede.getFullname());
-    	Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
-    	if (!us.isPresent()) {
+		assertNotNull (fede.getId());
+		assertEquals("Federico Orlando", fede.getFullname());
+		Optional<Patient> us = this.service.getPatientByEmail("federico.orlando@info.unlp.edu.ar");
+		if (!us.isPresent()) {
 			throw new VaxException("Patient doesn't exist");
 		}
 		Patient user = us.get();
 		assertNotNull (user.getId());
-    	assertEquals("Federico Orlando",user.getFullname());
-    	assertEquals(dob, user.getDayOfBirth());
-    	assertEquals("pas$w0rd", user.getPassword());
-    	VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
-    	assertEquals("Constraint Violation",ex.getMessage());
-    }
+		assertEquals("Federico Orlando",user.getFullname());
+		assertEquals(dob, user.getDayOfBirth());
+		assertEquals("pas$w0rd", user.getPassword());
+		VaxException ex = assertThrows(VaxException.class, () -> this.service.createPatient("federico.orlando@info.unlp.edu.ar", "Federico Orlando", "pas$w0rd", dob));
+		assertEquals("Constraint Violation",ex.getMessage());
+	}
 
 	@Test
 	public void testCreateVaccine() throws VaxException{
@@ -88,7 +88,7 @@ public class VaxServiceTestCase {
 		assertTrue(fede.getShots().contains(shot));
 		assertNotNull(shot.getShotCertificate());
 		assertNotNull(shot.getShotCertificate().getSerialNumber());
-		
+
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class VaxServiceTestCase {
 		assertEquals(1,AnaSaved.getCentres().size());
 		assertEquals(1,italiano.getStaffs().size());
 		assertTrue(italiano.getStaffs().contains(AnaSaved));
-		
+
 	}
 
 	@Test
