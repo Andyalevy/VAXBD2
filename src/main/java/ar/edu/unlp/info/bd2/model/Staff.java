@@ -9,7 +9,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "staff_type", discriminatorType = DiscriminatorType.STRING)
 @Entity
-@Table(name="Staff")
+@Table(name="staff")
 public abstract class Staff {
 
     @Id
