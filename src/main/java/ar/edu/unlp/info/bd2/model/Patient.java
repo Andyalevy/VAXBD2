@@ -18,8 +18,6 @@ public class Patient {
     private String fullname;
     private String password;
     private Date dayOfBirth;
-    @ManyToOne
-    private VaccinationSchedule schedule;
     @OneToMany
     private List<Shot> shots = new ArrayList<>();
 
@@ -63,14 +61,6 @@ public class Patient {
 
     public void setDayOfBirth(Date dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
-    }
-
-    public VaccinationSchedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(VaccinationSchedule schedule) {
-        this.schedule = schedule;
     }
 
     public Long getId() {
