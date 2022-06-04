@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +19,7 @@ public class VaccinationSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OrderColumn
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Vaccine> vaccines = new ArrayList<>();
 
