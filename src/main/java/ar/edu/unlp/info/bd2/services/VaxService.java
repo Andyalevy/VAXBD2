@@ -2,10 +2,11 @@ package ar.edu.unlp.info.bd2.services;
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Optional;
 
-
+@Transactional
 public interface VaxService extends VaxStatisticsService{
 
 
