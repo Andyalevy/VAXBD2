@@ -18,7 +18,7 @@ public class Patient {
     private String fullname;
     private String password;
     private Date dayOfBirth;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Shot> shots = new ArrayList<>();
 
     public Patient() {

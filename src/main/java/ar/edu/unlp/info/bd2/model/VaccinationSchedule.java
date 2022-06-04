@@ -3,14 +3,7 @@ package ar.edu.unlp.info.bd2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="vaccination_schedule")
@@ -20,7 +13,7 @@ public class VaccinationSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OrderColumn
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {

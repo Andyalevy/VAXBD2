@@ -17,7 +17,7 @@ public abstract class Staff {
     protected Long id;
     protected String fullName;
     protected String dni;
-    @ManyToMany(cascade = {CascadeType.ALL}) //TODO: checkear que estrategia de cascada usar
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     protected List<Centre> centres =  new ArrayList<>();
 
     public Staff() {
