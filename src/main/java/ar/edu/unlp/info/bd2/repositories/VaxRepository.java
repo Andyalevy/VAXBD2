@@ -6,8 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-
-import java.util.List;
+import java.util.Optional;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -23,45 +22,39 @@ public class VaxRepository {
      * @param dni dni del SupportStaff
      * @return un SupportStaff con ese dni
      */
-    public SupportStaff getSupportStaffByDni(String dni) {
-        SupportStaff supportStaff;
+    public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni").setParameter("dni", dni).uniqueResult();
+            return session.createQuery("FROM SupportStaff WHERE Dni = :dni",SupportStaff.class).setParameter("dni", dni).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return supportStaff;
     }
 
     /**
      * @param name nombre del centro
      * @return el centro que tiene ese nombre
      */
-    public Centre getCentreByName(String name) {
-        Centre centre;
+    public Optional<Centre> getCentreByName(String name) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name).uniqueResult();
+            return session.createQuery("FROM Centre WHERE Name = :name",Centre.class).setParameter("name", name).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return centre;
     }
 
     /**
      * @param email correo electrónico del paciente
      * @return el paciente que tiene ese correo electrónico
      */
-    public Patient getPatientByEmail(String email){
-        Patient patient;
+    public Optional<Patient> getPatientByEmail(String email){
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
+            return session.createQuery("FROM Patient WHERE Email = :email",Patient.class).setParameter("email", email).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return patient;
     }
 
     /**
@@ -69,15 +62,13 @@ public class VaxRepository {
      * @param name nombre de la vacuna
      * @return la vacuna con ese nombre
      */
-    public Vaccine getVaccineByName(String name) {
-        Vaccine vaccine;
+    public Optional<Vaccine> getVaccineByName(String name) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name).uniqueResult();
+            return session.createQuery("FROM Vaccine WHERE Name = :name",Vaccine.class).setParameter("name", name).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return vaccine;
     }
 
     /**
@@ -87,8 +78,8 @@ public class VaxRepository {
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
         VaccinationSchedule vaccinationSchedule;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); //
-            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+            Session session = this.sessionFactory.getCurrentSession();
+            vaccinationSchedule = session.get(VaccinationSchedule.class,id);
         } catch (Exception e) {
             return null;
         }

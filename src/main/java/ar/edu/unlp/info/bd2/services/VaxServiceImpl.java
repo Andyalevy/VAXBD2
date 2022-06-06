@@ -48,13 +48,13 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<Patient> getPatientByEmail(String email) {
-        return Optional.ofNullable(this.repository.getPatientByEmail(email));
+        return this.repository.getPatientByEmail(email);
     }
 
     @Override
     @Rollback
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.ofNullable(this.repository.getVaccineByName(name));
+        return this.repository.getVaccineByName(name);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return Optional.ofNullable(this.repository.getCentreByName(name));
+        return this.repository.getCentreByName(name);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
+        return this.repository.getSupportStaffByDni(dni);
     }
 
     @Override
