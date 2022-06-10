@@ -135,7 +135,7 @@ public class VaxRepository {
         Centre cen;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            cen = (Centre) session.createQuery("SELECT s.centre FROM Shot s INNER JOIN Centre c ON s.centre.id=c.id GROUP BY s.centre ORDER BY count(s.centre.id) DESC", Centre.class).setMaxResults(1).getSingleResult();
+            cen = (Centre) session.createQuery("SELECT sc FROM Shot s JOIN s.centre sc GROUP BY s.centre ORDER BY count(s.centre) DESC").setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             throw null;
         }
@@ -180,12 +180,8 @@ public class VaxRepository {
      */
     public List<Vaccine> getUnappliedVaccines() {
         List<Vaccine> vaccineList;
-        try {
             Session session = this.sessionFactory.getCurrentSession();
             vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
-        } catch (Exception e) {
-            return null;
-        }
         return vaccineList;
     }
 
@@ -270,14 +266,10 @@ public class VaxRepository {
      */
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
         List<ShotCertificate> shotList;
-        try {
-            Session session = this.sessionFactory.getCurrentSession();
-            shotList = (List<ShotCertificate>) session.createQuery(
-                            "FROM ShotCertificate WHERE date BETWEEN :startDate AND :endDate")
+        Session session = this.sessionFactory.getCurrentSession();
+        shotList = (List<ShotCertificate>) session.createQuery(
+                            "FROM ShotCertificate WHERE date >= :startDate AND date <= :endDate")
                     .setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
-        } catch (Exception e) {
-            return null;
-        }
         return shotList;
     }
 }
