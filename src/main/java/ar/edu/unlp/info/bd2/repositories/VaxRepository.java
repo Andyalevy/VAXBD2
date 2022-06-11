@@ -76,14 +76,12 @@ public class VaxRepository {
      * @return el esquema de vacunación con ese id
      */
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
-        VaccinationSchedule vaccinationSchedule;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            vaccinationSchedule = session.get(VaccinationSchedule.class,id);
+            return session.get(VaccinationSchedule.class,id);
         } catch (Exception e) {
             return null;
         }
-        return vaccinationSchedule;
     }
 
     /**
@@ -132,14 +130,12 @@ public class VaxRepository {
      * @return el centro que más vacunas aplicó
      */
     public Centre getTopShotCentre() {
-        Centre cen;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            cen = (Centre) session.createQuery("SELECT sc FROM Shot s JOIN s.centre sc GROUP BY s.centre ORDER BY count(s.centre) DESC").setMaxResults(1).getSingleResult();
+            return session.createQuery("SELECT sc FROM Shot s JOIN s.centre sc GROUP BY sc ORDER BY count(sc) DESC",Centre.class).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             throw null;
         }
-        return cen;
     }
 
     /**
@@ -147,14 +143,12 @@ public class VaxRepository {
      * @return Los enfermeros que no aplicaron vacunas
      */
     public List<Nurse> getNurseNotShot(){
-        List<Nurse> nurseList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            nurseList= (List<Nurse>) session.createQuery("FROM Nurse Nu WHERE Nu.id NOT IN(SELECT s.nurse.id FROM Shot s)").list();
+            return session.createQuery("SELECT n FROM Nurse n LEFT JOIN Shot s ON n.id = s.nurse WHERE s.id IS NULL",Nurse.class).getResultList();
         } catch (Exception e) {
             throw null;
         }
-        return nurseList;
     }
 
     /**
@@ -164,14 +158,12 @@ public class VaxRepository {
      * @return Lista con todos los Nurse que tengan más años de experiencia que years
      */
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
-        List<Nurse> nurseList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            nurseList = (List<Nurse>) session.createQuery("FROM Nurse WHERE Experience > :years").setParameter("years", years).getResultList();
+            return session.createQuery("FROM Nurse WHERE Experience > :years",Nurse.class).setParameter("years", years).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return nurseList;
     }
 
     /**
@@ -179,10 +171,12 @@ public class VaxRepository {
      * @return list of unapplied vaccines
      */
     public List<Vaccine> getUnappliedVaccines() {
-        List<Vaccine> vaccineList;
+        try {
             Session session = this.sessionFactory.getCurrentSession();
-            vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
-        return vaccineList;
+            return session.createQuery("SELECT v FROM Vaccine v LEFT JOIN Shot s ON v.id = s.vaccine WHERE s.id IS NULL",Vaccine.class).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -192,17 +186,15 @@ public class VaxRepository {
      * @return list of the Centres with more staff limit by n
      */
     public List<Centre> getCentresTopNStaff(int n) {
-        List<Centre> centreList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            centreList = (List<Centre>) session.createQuery("SELECT c " +
+            return session.createQuery("SELECT c " +
                     "FROM Staff s JOIN s.centres c " +
                     "GROUP BY c " +
-                    "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+                    "ORDER BY count(s) DESC",Centre.class).setMaxResults(n).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return centreList;
     }
 
     /**
@@ -210,14 +202,12 @@ public class VaxRepository {
      * @return Lista con todos los pacientes.
      */
     public List<Patient> getAllPatients() {
-        List<Patient> patientList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            patientList = (List<Patient>) session.createQuery("FROM Patient").getResultList();
+            return session.createQuery("FROM Patient",Patient.class).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return patientList;
     }
 
     /**
@@ -226,14 +216,12 @@ public class VaxRepository {
      * @return enfermeros/as con ese nombre
      */
     public List<Staff> getStaffWithName(String name) {
-        List<Staff> staffList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            staffList = (List<Staff>) session.createQuery("FROM Staff s WHERE s.fullName LIKE '%" + name + "%'").getResultList();
+            return session.createQuery("FROM Staff s WHERE s.fullName LIKE '%" + name + "%'",Staff.class).getResultList();
         } catch (Exception e) {
             throw null;
         }
-        return staffList;
     }
 
     /**
@@ -241,18 +229,16 @@ public class VaxRepository {
      * @return Area con menos empleados de los support Staff.
      */
     public String getLessEmployeesAreaSupportStaffArea() {
-        String supportStaffAreaWithLeastEmployees;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            supportStaffAreaWithLeastEmployees = (String) session.createQuery(
+            return session.createQuery(
                     "SELECT ss.area " +
                             "FROM SupportStaff ss " +
                             "GROUP BY ss.area " +
-                            "ORDER BY count(ss.area) ASC").setMaxResults(1).uniqueResult();
+                            "ORDER BY count(ss.area) ASC",String.class).setMaxResults(1).uniqueResult();
         } catch (Exception e) {
             return null;
         }
-        return supportStaffAreaWithLeastEmployees;
     }
 
     /**
@@ -265,11 +251,13 @@ public class VaxRepository {
      * @return List of ShotCertificate which happened between startDate and endDate.
      */
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        List<ShotCertificate> shotList;
-        Session session = this.sessionFactory.getCurrentSession();
-        shotList = (List<ShotCertificate>) session.createQuery(
-                            "FROM ShotCertificate WHERE date >= :startDate AND date <= :endDate")
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            return session.createQuery(
+                "FROM ShotCertificate WHERE date >= :startDate AND date <= :endDate",ShotCertificate.class)
                     .setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
-        return shotList;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
