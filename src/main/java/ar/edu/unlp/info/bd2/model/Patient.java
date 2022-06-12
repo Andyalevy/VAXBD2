@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Patient")
+@Table(name="patient")
 public class Patient {
 
     @Id
@@ -18,9 +18,7 @@ public class Patient {
     private String fullname;
     private String password;
     private Date dayOfBirth;
-    @ManyToOne
-    private VaccinationSchedule schedule;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Shot> shots = new ArrayList<>();
 
     public Patient() {
@@ -63,14 +61,6 @@ public class Patient {
 
     public void setDayOfBirth(Date dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
-    }
-
-    public VaccinationSchedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(VaccinationSchedule schedule) {
-        this.schedule = schedule;
     }
 
     public Long getId() {

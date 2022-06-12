@@ -3,16 +3,10 @@ package ar.edu.unlp.info.bd2.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Centre")
+@Table(name="centre")
 public class Centre {
 
     @Id
@@ -20,7 +14,7 @@ public class Centre {
     private Long id;
     @Column(name = "name", unique = true)
     private String name;
-    @ManyToMany(mappedBy = "centres")
+    @ManyToMany(mappedBy = "centres", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private List<Staff> staffs = new ArrayList<>();
 
     public Centre() {

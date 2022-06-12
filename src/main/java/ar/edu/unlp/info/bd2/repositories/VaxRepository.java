@@ -6,8 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-
-import java.util.List;
+import java.util.Optional;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -23,45 +22,39 @@ public class VaxRepository {
      * @param dni dni del SupportStaff
      * @return un SupportStaff con ese dni
      */
-    public SupportStaff getSupportStaffByDni(String dni) {
-        SupportStaff supportStaff;
+    public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            supportStaff = (SupportStaff) session.createQuery("FROM SupportStaff WHERE Dni = :dni").setParameter("dni", dni).uniqueResult();
+            return session.createQuery("FROM SupportStaff WHERE Dni = :dni",SupportStaff.class).setParameter("dni", dni).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return supportStaff;
     }
 
     /**
      * @param name nombre del centro
      * @return el centro que tiene ese nombre
      */
-    public Centre getCentreByName(String name) {
-        Centre centre;
+    public Optional<Centre> getCentreByName(String name) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            centre = (Centre) session.createQuery("FROM Centre WHERE Name = :name").setParameter("name", name).uniqueResult();
+            return session.createQuery("FROM Centre WHERE Name = :name",Centre.class).setParameter("name", name).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return centre;
     }
 
     /**
      * @param email correo electrónico del paciente
      * @return el paciente que tiene ese correo electrónico
      */
-    public Patient getPatientByEmail(String email){
-        Patient patient;
+    public Optional<Patient> getPatientByEmail(String email){
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            patient = (Patient) session.createQuery("FROM Patient WHERE Email = :email").setParameter("email", email).uniqueResult();
+            return session.createQuery("FROM Patient WHERE Email = :email",Patient.class).setParameter("email", email).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return patient;
     }
 
     /**
@@ -69,15 +62,13 @@ public class VaxRepository {
      * @param name nombre de la vacuna
      * @return la vacuna con ese nombre
      */
-    public Vaccine getVaccineByName(String name) {
-        Vaccine vaccine;
+    public Optional<Vaccine> getVaccineByName(String name) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            vaccine = (Vaccine) session.createQuery("FROM Vaccine WHERE Name = :name").setParameter("name", name).uniqueResult();
+            return session.createQuery("FROM Vaccine WHERE Name = :name",Vaccine.class).setParameter("name", name).uniqueResultOptional();
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return vaccine;
     }
 
     /**
@@ -85,14 +76,12 @@ public class VaxRepository {
      * @return el esquema de vacunación con ese id
      */
     public VaccinationSchedule getVaccinationScheduleById(Long id) {
-        VaccinationSchedule vaccinationSchedule;
         try {
-            Session session = this.sessionFactory.getCurrentSession(); //
-            vaccinationSchedule = (VaccinationSchedule) session.createQuery("FROM VaccinationSchedule WHERE Id = :id").setParameter("id", id).uniqueResult();
+            Session session = this.sessionFactory.getCurrentSession();
+            return session.get(VaccinationSchedule.class,id);
         } catch (Exception e) {
             return null;
         }
-        return vaccinationSchedule;
     }
 
     /**
@@ -141,14 +130,12 @@ public class VaxRepository {
      * @return el centro que más vacunas aplicó
      */
     public Centre getTopShotCentre() {
-        Centre cen;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            cen = (Centre) session.createQuery("SELECT s.centre FROM Shot s INNER JOIN Centre c ON s.centre.id=c.id GROUP BY s.centre ORDER BY count(s.centre.id) DESC", Centre.class).setMaxResults(1).getSingleResult();
+            return session.createQuery("SELECT sc FROM Shot s JOIN s.centre sc GROUP BY sc ORDER BY count(sc) DESC",Centre.class).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             throw null;
         }
-        return cen;
     }
 
     /**
@@ -156,14 +143,12 @@ public class VaxRepository {
      * @return Los enfermeros que no aplicaron vacunas
      */
     public List<Nurse> getNurseNotShot(){
-        List<Nurse> nurseList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            nurseList= (List<Nurse>) session.createQuery("FROM Nurse Nu WHERE Nu.id NOT IN(SELECT s.nurse.id FROM Shot s)").list();
+            return session.createQuery("SELECT n FROM Nurse n LEFT JOIN Shot s ON n.id = s.nurse WHERE s.id IS NULL",Nurse.class).getResultList();
         } catch (Exception e) {
             throw null;
         }
-        return nurseList;
     }
 
     /**
@@ -173,14 +158,12 @@ public class VaxRepository {
      * @return Lista con todos los Nurse que tengan más años de experiencia que years
      */
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
-        List<Nurse> nurseList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            nurseList = (List<Nurse>) session.createQuery("FROM Nurse WHERE Experience > :years").setParameter("years", years).getResultList();
+            return session.createQuery("FROM Nurse WHERE Experience > :years",Nurse.class).setParameter("years", years).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return nurseList;
     }
 
     /**
@@ -188,14 +171,12 @@ public class VaxRepository {
      * @return list of unapplied vaccines
      */
     public List<Vaccine> getUnappliedVaccines() {
-        List<Vaccine> vaccineList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            vaccineList = (List<Vaccine>) session.createQuery("FROM Vaccine v WHERE NOT EXISTS (FROM Shot s WHERE (v.id = s.vaccine))").getResultList();
+            return session.createQuery("SELECT v FROM Vaccine v LEFT JOIN Shot s ON v.id = s.vaccine WHERE s.id IS NULL",Vaccine.class).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return vaccineList;
     }
 
     /**
@@ -205,17 +186,15 @@ public class VaxRepository {
      * @return list of the Centres with more staff limit by n
      */
     public List<Centre> getCentresTopNStaff(int n) {
-        List<Centre> centreList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            centreList = (List<Centre>) session.createQuery("SELECT c " +
+            return session.createQuery("SELECT c " +
                     "FROM Staff s JOIN s.centres c " +
                     "GROUP BY c " +
-                    "ORDER BY count(s) DESC").setMaxResults(n).getResultList();
+                    "ORDER BY count(s) DESC",Centre.class).setMaxResults(n).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return centreList;
     }
 
     /**
@@ -223,14 +202,12 @@ public class VaxRepository {
      * @return Lista con todos los pacientes.
      */
     public List<Patient> getAllPatients() {
-        List<Patient> patientList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            patientList = (List<Patient>) session.createQuery("FROM Patient").getResultList();
+            return session.createQuery("FROM Patient",Patient.class).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return patientList;
     }
 
     /**
@@ -239,14 +216,12 @@ public class VaxRepository {
      * @return enfermeros/as con ese nombre
      */
     public List<Staff> getStaffWithName(String name) {
-        List<Staff> staffList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            staffList = (List<Staff>) session.createQuery("FROM Staff s WHERE s.fullName LIKE '%" + name + "%'").getResultList();
+            return session.createQuery("FROM Staff s WHERE s.fullName LIKE '%" + name + "%'",Staff.class).getResultList();
         } catch (Exception e) {
             throw null;
         }
-        return staffList;
     }
 
     /**
@@ -254,18 +229,16 @@ public class VaxRepository {
      * @return Area con menos empleados de los support Staff.
      */
     public String getLessEmployeesAreaSupportStaffArea() {
-        String supportStaffAreaWithLeastEmployees;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            supportStaffAreaWithLeastEmployees = (String) session.createQuery(
+            return session.createQuery(
                     "SELECT ss.area " +
                             "FROM SupportStaff ss " +
                             "GROUP BY ss.area " +
-                            "ORDER BY count(ss.area) ASC").setMaxResults(1).uniqueResult();
+                            "ORDER BY count(ss.area) ASC",String.class).setMaxResults(1).uniqueResult();
         } catch (Exception e) {
             return null;
         }
-        return supportStaffAreaWithLeastEmployees;
     }
 
     /**
@@ -278,15 +251,13 @@ public class VaxRepository {
      * @return List of ShotCertificate which happened between startDate and endDate.
      */
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        List<ShotCertificate> shotList;
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            shotList = (List<ShotCertificate>) session.createQuery(
-                            "FROM ShotCertificate WHERE date BETWEEN :startDate AND :endDate")
+            return session.createQuery(
+                "FROM ShotCertificate WHERE date >= :startDate AND date <= :endDate",ShotCertificate.class)
                     .setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
         } catch (Exception e) {
             return null;
         }
-        return shotList;
     }
 }

@@ -5,7 +5,6 @@ import ar.edu.unlp.info.bd2.repositories.VaxException;
 import java.util.Date;
 import java.util.Optional;
 
-
 public interface VaxService extends VaxStatisticsService{
 
 

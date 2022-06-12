@@ -9,6 +9,7 @@ import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 
 import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 public class VaxServiceImpl implements VaxService{
 
@@ -21,6 +22,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email,fullname,password,dayOfBirth);
         this.repository.save(patient);
@@ -28,6 +30,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public Vaccine createVaccine(String name) throws VaxException {
         Vaccine vaccine = new Vaccine(name);
         this.repository.save(vaccine);
@@ -35,6 +38,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
         Shot shot = new Shot(patient,vaccine,date,centre,nurse);
         this.repository.save(shot);
@@ -44,16 +48,17 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<Patient> getPatientByEmail(String email) {
-        return Optional.ofNullable(this.repository.getPatientByEmail(email));
+        return this.repository.getPatientByEmail(email);
     }
 
     @Override
     @Rollback
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.ofNullable(this.repository.getVaccineByName(name));
+        return this.repository.getVaccineByName(name);
     }
 
     @Override
+    @Transactional
     public Centre createCentre(String name) throws VaxException {
         Centre centre = new Centre(name);
         this.repository.save(centre);
@@ -61,6 +66,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         Nurse nurse = new Nurse(dni,fullName,experience);
         this.repository.save(nurse);
@@ -68,6 +74,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
         SupportStaff supportStaff = new SupportStaff(dni,fullName,area);
         this.repository.save(supportStaff);
@@ -75,6 +82,7 @@ public class VaxServiceImpl implements VaxService{
     }
 
     @Override
+    @Transactional
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         this.repository.save(vaccinationSchedule);
@@ -90,16 +98,18 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return Optional.ofNullable(this.repository.getCentreByName(name));
+        return this.repository.getCentreByName(name);
     }
 
     @Override
+    @Transactional
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
         this.repository.update(staff);
         return staff;
     }
 
     @Override
+    @Transactional
     public Centre updateCentre(Centre centre) throws VaxException {
         this.repository.update(centre);
         return centre;
@@ -108,10 +118,11 @@ public class VaxServiceImpl implements VaxService{
     @Override
     @Rollback
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.ofNullable(this.repository.getSupportStaffByDni(dni));
+        return this.repository.getSupportStaffByDni(dni);
     }
 
     @Override
+    @Transactional
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
         this.repository.update(vaccinationSchedule);
         return vaccinationSchedule;

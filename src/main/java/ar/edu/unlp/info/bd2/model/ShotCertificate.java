@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ShotCertificate")
+@Table(name="shot_certificate")
 public class ShotCertificate {
 
     @Id
