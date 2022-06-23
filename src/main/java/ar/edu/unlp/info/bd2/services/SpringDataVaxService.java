@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.xml.bind.ValidationEvent;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ar.edu.unlp.info.bd2.model.*;
@@ -48,8 +49,7 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.nurseRepository.findByExperienceGreaterThan(years);
     }
 
     @Override
@@ -89,21 +89,44 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.shotCertificateRepository.findByDateBetween(startDate, endDate);
     }
 
     @Override
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email, fullname, password, dayOfBirth);
-        this.patientRepository.save(patient);
+        try {
+            this.patientRepository.saveAndFlush(patient);
+        } catch (Exception e) { //TODO: check this
+            Throwable t = e.getCause();
+            while ((t != null) && !(t instanceof ConstraintViolationException)) {
+                t = t.getCause();
+            }
+            if (t instanceof ConstraintViolationException) {
+                throw new VaxException("Constraint Violation");
+            } else {
+                throw new VaxException("Exception thrown: " + e.getMessage());
+            }
+        }
         return patient;
     }
 
     @Override
     public Vaccine createVaccine(String name) throws VaxException {
         Vaccine vax = new Vaccine(name);
-        this.vaccineRepository.save(vax);
+        try {
+            this.vaccineRepository.saveAndFlush(vax);
+        } catch (Exception e) { //TODO: check this
+            Throwable t = e.getCause();
+            while ((t != null) && !(t instanceof ConstraintViolationException)) {
+                t = t.getCause();
+            }
+            if (t instanceof ConstraintViolationException) {
+                throw new VaxException("Constraint Violation");
+            } else {
+                throw new VaxException("Exception thrown: " + e.getMessage());
+            }
+}
         return vax;
     }
 
@@ -148,13 +171,13 @@ public class SpringDataVaxService implements VaxService{
     @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
-        this.vaccinationScheduleRepository.save(vaccinationSchedule);
+        this.vaccinationScheduleRepository.saveAndFlush(vaccinationSchedule);
         return vaccinationSchedule;
     }
 
     @Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
-        return null;//this.vaccinationScheduleRepository.findById(id);
+        return null;//TODO: this.vaccinationScheduleRepository.findById(id);
     }
 
     @Override

@@ -6,4 +6,6 @@ import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 
 public interface VaccinationScheduleRepository extends CrudRepository<VaccinationSchedule, Long>{
 
+    void saveAndFlush(VaccinationSchedule vaccinationSchedule);
+
 }

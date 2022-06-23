@@ -10,4 +10,6 @@ public interface VaccineRepository extends CrudRepository<Vaccine, Long>{
 
     Optional<Vaccine> findByName(String name);
 
+    void saveAndFlush(Vaccine vax);
+
 }

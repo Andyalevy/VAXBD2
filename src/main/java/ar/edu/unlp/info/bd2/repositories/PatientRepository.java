@@ -10,4 +10,6 @@ public interface PatientRepository extends CrudRepository<Patient, Long>{
 
     Optional<Patient> findByEmail(String email);
 
+    void saveAndFlush(Patient patient);
+
 }
