@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.xml.bind.ValidationEvent;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.CentreRepository;
 import ar.edu.unlp.info.bd2.repositories.NurseRepository;
@@ -20,14 +22,23 @@ import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 public class SpringDataVaxService implements VaxService{
 
+    @Autowired
     private PatientRepository patientRepository;
+    @Autowired
     private StaffRepository staffRepository;
+    @Autowired
     private VaccineRepository vaccineRepository;
+    @Autowired
     private CentreRepository centreRepository;
+    @Autowired
     private ShotCertificateRepository shotCertificateRepository;
+    @Autowired
     private VaccinationScheduleRepository vaccinationScheduleRepository;
+    @Autowired
     private ShotRepository shotRepository;
+    @Autowired
     private NurseRepository nurseRepository;
+    @Autowired
     private SupportStaffRepository supportStaffRepository;
 
     @Override
@@ -124,7 +135,7 @@ public class SpringDataVaxService implements VaxService{
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         Nurse nurse = new Nurse(dni, fullName, experience);
         this.nurseRepository.save(nurse);
-        return null;
+        return nurse;
     }
 
     @Override
@@ -153,14 +164,14 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
-        // TODO Auto-generated method stub
-        return null;
+        this.supportStaffRepository.save(staff);
+        return staff;
     }
 
     @Override
     public Centre updateCentre(Centre centre) throws VaxException {
-        // TODO Auto-generated method stub
-        return null;
+        this.centreRepository.save(centre);
+        return centre;
     }
 
     @Override
@@ -170,8 +181,8 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) throws VaxException {
-        // TODO Auto-generated method stub
-        return null;
+        this.vaccinationScheduleRepository.save(schedule);
+        return schedule;
     }
     
 }
