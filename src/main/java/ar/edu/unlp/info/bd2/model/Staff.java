@@ -15,6 +15,7 @@ public abstract class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+    @Column(name = "full_name")
     protected String fullName;
     protected String dni;
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)

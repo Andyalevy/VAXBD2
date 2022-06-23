@@ -13,7 +13,7 @@ public class Shot {
     private Long id;
     private Date date;
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name="shotCertificate_id", nullable = false)
+    @JoinColumn(name="shot_certificate_id", nullable = false)
     private ShotCertificate shotCertificate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="patient_id", nullable = false)

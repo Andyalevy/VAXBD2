@@ -17,6 +17,7 @@ public class Patient {
     private String email;
     private String fullname;
     private String password;
+    @Column(name = "day_of_birth")
     private Date dayOfBirth;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Shot> shots = new ArrayList<>();
