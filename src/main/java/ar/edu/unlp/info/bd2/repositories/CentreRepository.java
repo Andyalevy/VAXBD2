@@ -15,4 +15,8 @@ public interface CentreRepository extends CrudRepository<Centre, Long>{
 
     @Query("SELECT sc FROM Shot s JOIN s.centre sc GROUP BY sc ORDER BY count(sc) DESC")
     List<Centre> findAllGroupByOrderByCountByShotDesc(Pageable pageable);
+
+    @Query("SELECT sc FROM Staff s JOIN s.centres sc GROUP BY sc ORDER BY count(s) DESC")
+    List<Centre> findAllGroupByOrderByCountByStaffDesc(Pageable pageable);
+
 }

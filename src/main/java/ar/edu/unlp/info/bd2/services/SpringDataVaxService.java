@@ -56,8 +56,8 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<Centre> getCentresTopNStaff(int n) {
-        // TODO Auto-generated method stub
-        return null;
+        Pageable nPagesWithOneElement = PageRequest.of(0,n);
+        return centreRepository.findAllGroupByOrderByCountByStaffDesc(nPagesWithOneElement);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class SpringDataVaxService implements VaxService{
             } else {
                 throw new VaxException("Exception thrown: " + e.getMessage());
             }
-}
+        }
         return vax;
     }
 
