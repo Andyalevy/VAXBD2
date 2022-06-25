@@ -20,6 +20,8 @@ import ar.edu.unlp.info.bd2.repositories.SupportStaffRepository;
 import ar.edu.unlp.info.bd2.repositories.VaccinationScheduleRepository;
 import ar.edu.unlp.info.bd2.repositories.VaccineRepository;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 public class SpringDataVaxService implements VaxService{
 
@@ -60,8 +62,10 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public Centre getTopShotCentre() {
-        // TODO Auto-generated method stub
-        return null;
+        Pageable firstPageWithOneElement = PageRequest.of(0,1);
+        List<Centre> centreList = this.centreRepository.findAllGroupByOrderByCountByShotDesc(firstPageWithOneElement);
+        if (centreList.isEmpty()) throw null;
+        return centreList.get(0);
     }
 
     @Override
