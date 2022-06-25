@@ -86,8 +86,7 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<Vaccine> getUnappliedVaccines() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.vaccineRepository.findAllVaccineWhereShotIsNull();
     }
 
     @Override
