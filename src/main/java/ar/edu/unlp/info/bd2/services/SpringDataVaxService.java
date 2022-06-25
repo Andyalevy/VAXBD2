@@ -70,8 +70,7 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<Nurse> getNurseNotShot() {
-        List<Nurse>  nurseList = this.nurseRepository.findAllNurseWhereShotIdIsNull();
-        return nurseList;
+        return this.nurseRepository.findAllNurseWhereShotIdIsNull();
     }
 
     @Override
