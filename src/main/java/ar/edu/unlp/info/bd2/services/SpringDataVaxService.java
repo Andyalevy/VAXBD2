@@ -75,8 +75,10 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public String getLessEmployeesSupportStaffArea() {
-        // TODO Auto-generated method stub
-        return null;
+        Pageable firstPageWithOneElement = PageRequest.of(0,1);
+        List<String> supportStaffAreaList = this.supportStaffRepository.findLessSupportStaffArea(firstPageWithOneElement);
+        if (supportStaffAreaList.isEmpty()) throw null;
+        return supportStaffAreaList.get(0);
     }
 
     @Override
