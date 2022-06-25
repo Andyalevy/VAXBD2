@@ -64,8 +64,8 @@ public class SpringDataVaxService implements VaxService{
     public Centre getTopShotCentre() {
         Pageable firstPageWithOneElement = PageRequest.of(0,1);
         List<Centre> centreList = this.centreRepository.findAllGroupByOrderByCountByShotDesc(firstPageWithOneElement);
-        if (centreList.isEmpty()) throw null;
-        return centreList.get(0);
+        if (centreList.isEmpty()) throw null; //TODO: Consultar
+        return centreList.get(0); //TODO: Consultar
     }
 
     @Override
