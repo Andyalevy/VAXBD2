@@ -70,8 +70,8 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public List<Nurse> getNurseNotShot() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Nurse>  nurseList = this.nurseRepository.findAllNurseWhereShotIdIsNull();
+        return nurseList;
     }
 
     @Override
