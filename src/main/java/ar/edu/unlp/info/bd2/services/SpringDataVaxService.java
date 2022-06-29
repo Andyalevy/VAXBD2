@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import javax.xml.bind.ValidationEvent;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.CentreRepository;
@@ -22,6 +22,7 @@ import ar.edu.unlp.info.bd2.repositories.VaccineRepository;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 public class SpringDataVaxService implements VaxService{
 
@@ -64,8 +65,8 @@ public class SpringDataVaxService implements VaxService{
     public Centre getTopShotCentre() {
         Pageable firstPageWithOneElement = PageRequest.of(0,1);
         List<Centre> centreList = this.centreRepository.findAllGroupByOrderByCountByShotDesc(firstPageWithOneElement);
-        if (centreList.isEmpty()) throw null; //TODO: Consultar
-        return centreList.get(0); //TODO: Consultar
+        if (centreList.isEmpty()) throw null; 
+        return centreList.get(0);
     }
 
     @Override
@@ -97,44 +98,35 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email, fullname, password, dayOfBirth);
         try {
             this.patientRepository.saveAndFlush(patient);
-        } catch (Exception e) { //TODO: check this
-            Throwable t = e.getCause();
-            while ((t != null) && !(t instanceof ConstraintViolationException)) {
-                t = t.getCause();
-            }
-            if (t instanceof ConstraintViolationException) {
-                throw new VaxException("Constraint Violation");
-            } else {
-                throw new VaxException("Exception thrown: " + e.getMessage());
-            }
+        } catch (DataIntegrityViolationException e) { 
+            throw new VaxException("Constraint Violation");
+        } catch (Exception e){
+            throw new VaxException(e.getMessage());
         }
         return patient;
     }
 
     @Override
+    @Transactional
     public Vaccine createVaccine(String name) throws VaxException {
         Vaccine vax = new Vaccine(name);
         try {
             this.vaccineRepository.saveAndFlush(vax);
-        } catch (Exception e) { //TODO: check this
-            Throwable t = e.getCause();
-            while ((t != null) && !(t instanceof ConstraintViolationException)) {
-                t = t.getCause();
-            }
-            if (t instanceof ConstraintViolationException) {
-                throw new VaxException("Constraint Violation");
-            } else {
-                throw new VaxException("Exception thrown: " + e.getMessage());
-            }
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        } catch (Exception e){
+            throw new VaxException(e.getMessage());
         }
         return vax;
     }
 
     @Override
+    @Transactional
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
         Shot shot = new Shot(patient, vaccine, date, centre, nurse);
         try{
@@ -156,6 +148,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public Centre createCentre(String name) throws VaxException {
         Centre centre = new Centre(name);
         try{
@@ -167,6 +160,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         Nurse nurse = new Nurse(dni, fullName, experience);
         try {
@@ -178,6 +172,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
         SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
         try {
@@ -189,6 +184,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         try {
@@ -218,6 +214,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
         try{
             this.supportStaffRepository.save(staff);
@@ -228,6 +225,7 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public Centre updateCentre(Centre centre) throws VaxException {
         try {
             this.centreRepository.save(centre);
@@ -238,11 +236,13 @@ public class SpringDataVaxService implements VaxService{
     }
 
     @Override
+    @Transactional
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         return this.supportStaffRepository.findByDni(dni);
     }
 
     @Override
+    @Transactional
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) throws VaxException {
         try{
             this.vaccinationScheduleRepository.save(schedule);
