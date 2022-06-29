@@ -137,8 +137,12 @@ public class SpringDataVaxService implements VaxService{
     @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
         Shot shot = new Shot(patient, vaccine, date, centre, nurse);
-        this.shotRepository.save(shot);
-        return shot;
+        try{
+            this.shotRepository.save(shot);
+            return shot;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
@@ -154,52 +158,83 @@ public class SpringDataVaxService implements VaxService{
     @Override
     public Centre createCentre(String name) throws VaxException {
         Centre centre = new Centre(name);
-        this.centreRepository.save(centre);
-        return centre;
+        try{
+            this.centreRepository.save(centre);
+            return centre;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
         Nurse nurse = new Nurse(dni, fullName, experience);
-        this.nurseRepository.save(nurse);
-        return nurse;
+        try {
+            this.nurseRepository.save(nurse);
+            return nurse;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
         SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
-        this.supportStaffRepository.save(supportStaff);
-        return supportStaff;
+        try {
+            this.supportStaffRepository.save(supportStaff);
+            return supportStaff;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
         VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
-        this.vaccinationScheduleRepository.saveAndFlush(vaccinationSchedule);
-        return vaccinationSchedule;
+        try {
+            this.vaccinationScheduleRepository.saveAndFlush(vaccinationSchedule);
+            return vaccinationSchedule;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
-        return this.vaccinationScheduleRepository.findById(id).get();
-        // TODO: Esto en realidad esta mal porque estamos parcheando el optional. Consultar.
+        try {
+            return this.vaccinationScheduleRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public Optional<Centre> getCentreByName(String name) throws VaxException {
-        return this.centreRepository.findByName(name);
+        try{
+            return this.centreRepository.findByName(name);
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
-        this.supportStaffRepository.save(staff);
-        return staff;
+        try{
+            this.supportStaffRepository.save(staff);
+            return staff;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
     public Centre updateCentre(Centre centre) throws VaxException {
-        this.centreRepository.save(centre);
-        return centre;
+        try {
+            this.centreRepository.save(centre);
+            return centre;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
 
     @Override
@@ -209,8 +244,12 @@ public class SpringDataVaxService implements VaxService{
 
     @Override
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) throws VaxException {
-        this.vaccinationScheduleRepository.save(schedule);
-        return schedule;
+        try{
+            this.vaccinationScheduleRepository.save(schedule);
+            return schedule;
+        } catch (Exception e){
+            throw new VaxException("Exception thrown: " + e.getMessage());
+        }
     }
     
 }
